@@ -155,7 +155,7 @@ pnpm run start
 
 ## 🔔 Konfiguracja Telegram Alerts
 
-1. Utwórz bota przez @BotFather
+1. Utwórz bota przez @BotFather (sugerowany username: @wig30_bot)
 2. Uzyskaj token i chat ID
 3. Ustaw zmienne środowiskowe:
 
@@ -170,6 +170,8 @@ export TELEGRAM_CHAT_ID='twój_chat_id'
 cd code
 python3 telegram_alerts.py --monitor
 ```
+
+**Bot**: [@wig30_bot](https://t.me/wig30_bot) (jeśli dostępny)
 
 Szczegółowa instrukcja: [TELEGRAM_SETUP.md](TELEGRAM_SETUP.md)
 

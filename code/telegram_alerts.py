@@ -604,11 +604,13 @@ if __name__ == "__main__":
             print("❌ Error: TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID must be set")
             print("\nSetup:")
             print("1. Create bot with @BotFather on Telegram")
+            print("   Suggested bot username: @wig30_bot")
             print("2. Get bot token")
             print("3. Get your chat ID (send message to bot, then visit: https://api.telegram.org/bot<TOKEN>/getUpdates)")
             print("4. Export variables:")
             print("   export TELEGRAM_BOT_TOKEN='your_token'")
             print("   export TELEGRAM_CHAT_ID='your_chat_id'")
+            print("\nBot: https://t.me/wig30_bot")
             sys.exit(1)
         
         bot = TelegramBot(bot_token, chat_id)

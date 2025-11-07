@@ -6,9 +6,11 @@
 
 1. Otwórz Telegram i znajdź **@BotFather**
 2. Wyślij komendę: `/newbot`
-3. Podaj nazwę bota (np. "WIG80 Alerts")
-4. Podaj username bota (np. "wig80_alerts_bot")
+3. Podaj nazwę bota (np. "WIG30/WIG80 Alerts")
+4. Podaj username bota: **@wig30_bot** (lub inny dostępny)
 5. **Zapisz token** który otrzymasz (wygląda jak: `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`)
+
+**Uwaga**: Jeśli username @wig30_bot jest już zajęty, użyj innego (np. @wig30_alerts_bot)
 
 ### Krok 2: Uzyskaj Chat ID
 
