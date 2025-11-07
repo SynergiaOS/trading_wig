@@ -9,17 +9,17 @@ RUN apk add --no-cache python3 py3-pip
 
 WORKDIR /app
 
-# Copy entire frontend directory structure
-COPY polish-finance-platform/ ./polish-finance-platform/
+# Copy entire frontend directory structure (all files including src/lib/)
+COPY polish-finance-platform/polish-finance-app/ ./polish-finance-platform/polish-finance-app/
 
 # Install frontend dependencies
 WORKDIR /app/polish-finance-platform/polish-finance-app
 
-# Verify files are copied (debug)
-RUN echo "=== Checking package files ===" && \
-    ls -la package.json pnpm-lock.yaml 2>&1 || (echo "Files not found:" && ls -la) && \
-    echo "=== Checking src/lib files ===" && \
-    ls -la src/lib/ 2>&1 || echo "src/lib not found"
+# Verify src/lib files are copied (debug)
+RUN echo "=== Checking src/lib files ===" && \
+    ls -la src/lib/ 2>&1 || echo "src/lib not found" && \
+    echo "=== Files in src/lib ===" && \
+    ls -la src/lib/*.ts 2>&1 || echo "No .ts files found"
 
 # Install dependencies - always use --no-frozen-lockfile to avoid version issues
 RUN pnpm install --no-frozen-lockfile
