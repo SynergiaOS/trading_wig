@@ -3,8 +3,8 @@
 
 FROM node:18-alpine AS frontend-builder
 
-# Install pnpm
-RUN npm install -g pnpm@8
+# Install pnpm (use latest version to match lockfile)
+RUN npm install -g pnpm@latest
 
 # Install Python
 RUN apk add --no-cache python3 py3-pip
@@ -21,8 +21,8 @@ RUN echo "=== Files in current directory ===" && \
     ls -la && \
     echo "=== Checking for pnpm-lock.yaml ===" && \
     test -f pnpm-lock.yaml && echo "✅ pnpm-lock.yaml EXISTS" || echo "❌ pnpm-lock.yaml NOT FOUND"
-# Install dependencies (use --no-frozen-lockfile as fallback if lockfile missing)
-RUN pnpm install --no-frozen-lockfile || pnpm install
+# Install dependencies (lockfile exists, use it)
+RUN pnpm install --frozen-lockfile
 
 # Build frontend
 RUN pnpm run build:prod
