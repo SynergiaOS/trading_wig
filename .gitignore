@@ -10,8 +10,11 @@ dist/
 downloads/
 eggs/
 .eggs/
+# Python lib directories (not frontend src/lib)
 lib/
 lib64/
+# But allow frontend src/lib
+!polish-finance-platform/polish-finance-app/src/lib/
 parts/
 sdist/
 var/

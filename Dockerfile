@@ -16,7 +16,10 @@ COPY polish-finance-platform/ ./polish-finance-platform/
 WORKDIR /app/polish-finance-platform/polish-finance-app
 
 # Verify files are copied (debug)
-RUN ls -la package.json pnpm-lock.yaml 2>&1 || (echo "Files not found:" && ls -la)
+RUN echo "=== Checking package files ===" && \
+    ls -la package.json pnpm-lock.yaml 2>&1 || (echo "Files not found:" && ls -la) && \
+    echo "=== Checking src/lib files ===" && \
+    ls -la src/lib/ 2>&1 || echo "src/lib not found"
 
 # Install dependencies - always use --no-frozen-lockfile to avoid version issues
 RUN pnpm install --no-frozen-lockfile
