@@ -27,10 +27,10 @@ RUN pnpm install --no-frozen-lockfile
 # Build frontend
 RUN pnpm run build:prod
 
-# Install Python dependencies
+# Install Python dependencies (use --break-system-packages for Docker containers)
 WORKDIR /app
 COPY code/requirements.txt ./code/
-RUN pip install --no-cache-dir -r code/requirements.txt
+RUN pip install --no-cache-dir --break-system-packages -r code/requirements.txt
 
 # Copy Python code
 COPY code/ ./code/
