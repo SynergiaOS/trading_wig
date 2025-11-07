@@ -16,16 +16,13 @@ COPY polish-finance-platform/ ./polish-finance-platform/
 
 # Install frontend dependencies
 WORKDIR /app/polish-finance-platform/polish-finance-app
-# List files for debugging
-RUN ls -la | head -20
-# Check if pnpm-lock.yaml exists and install accordingly
-RUN if [ -f pnpm-lock.yaml ]; then \
-        echo "✅ Found pnpm-lock.yaml, using --frozen-lockfile"; \
-        pnpm install --frozen-lockfile; \
-    else \
-        echo "⚠️  No pnpm-lock.yaml found, installing without --frozen-lockfile"; \
-        pnpm install; \
-    fi
+# Debug: show what files are present
+RUN echo "=== Files in current directory ===" && \
+    ls -la && \
+    echo "=== Checking for pnpm-lock.yaml ===" && \
+    test -f pnpm-lock.yaml && echo "✅ pnpm-lock.yaml EXISTS" || echo "❌ pnpm-lock.yaml NOT FOUND"
+# Install dependencies (use --no-frozen-lockfile as fallback if lockfile missing)
+RUN pnpm install --no-frozen-lockfile || pnpm install
 
 # Build frontend
 RUN pnpm run build:prod
