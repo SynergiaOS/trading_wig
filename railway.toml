@@ -1,0 +1,13 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "cd polish-finance-platform/polish-finance-app && pnpm run start"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+# Environment variables (set in Railway dashboard)
+# VITE_API_URL=https://your-backend.railway.app
+# VITE_ANALYSIS_API_URL=https://your-analysis.railway.app
+# VITE_REFRESH_INTERVAL=30000
+

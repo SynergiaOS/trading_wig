@@ -1,0 +1,20 @@
+# Nixpacks configuration for Railway
+# Railway uses Nixpacks as default builder
+
+[phases.setup]
+nixPkgs = ["python312", "nodejs_18", "pnpm"]
+
+[phases.install]
+cmds = [
+  "cd code && pip install -r requirements.txt",
+  "cd polish-finance-platform/polish-finance-app && pnpm install"
+]
+
+[phases.build]
+cmds = [
+  "cd polish-finance-platform/polish-finance-app && pnpm run build:prod"
+]
+
+[start]
+cmd = "cd polish-finance-platform/polish-finance-app && pnpm run start"
+
