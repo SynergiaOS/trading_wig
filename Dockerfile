@@ -30,7 +30,9 @@ RUN pnpm run build:prod
 # Install Python dependencies (use --break-system-packages for Docker containers)
 WORKDIR /app
 COPY code/requirements.txt ./code/
-RUN pip install --no-cache-dir --break-system-packages -r code/requirements.txt
+# Force pip to use --break-system-packages (required for Python 3.11+ in Alpine)
+RUN pip install --no-cache-dir --break-system-packages -r code/requirements.txt || \
+    (echo "⚠️  pip install failed, retrying..." && pip install --no-cache-dir --break-system-packages -r code/requirements.txt)
 
 # Copy Python code
 COPY code/ ./code/
