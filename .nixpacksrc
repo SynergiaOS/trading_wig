@@ -1,0 +1,27 @@
+# Nixpacks configuration for Railway
+# This file is used by Railway's Nixpacks builder
+
+# Install Node.js 18 and Python 3.12
+providers = ["nix"]
+
+# Setup phase
+setup = """
+  nix-env -iA nixpkgs.nodejs_18
+  nix-env -iA nixpkgs.python312
+  npm install -g pnpm
+"""
+
+# Install phase
+install = """
+  cd code && pip install -r requirements.txt
+  cd ../polish-finance-platform/polish-finance-app && pnpm install
+"""
+
+# Build phase
+build = """
+  cd polish-finance-platform/polish-finance-app && pnpm run build:prod
+"""
+
+# Start command
+start = "cd polish-finance-platform/polish-finance-app && pnpm run start"
+

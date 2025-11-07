@@ -1,0 +1,15 @@
+{
+  "name": "polish-finance-platform",
+  "version": "1.0.0",
+  "description": "Polish Financial Analysis Platform",
+  "scripts": {
+    "install-pnpm": "npm install -g pnpm",
+    "build": "cd polish-finance-platform/polish-finance-app && pnpm install && pnpm run build:prod",
+    "start": "cd polish-finance-platform/polish-finance-app && pnpm run start"
+  },
+  "engines": {
+    "node": "18.x",
+    "pnpm": "8.x"
+  }
+}
+
