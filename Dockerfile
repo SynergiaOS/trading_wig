@@ -39,3 +39,4 @@ EXPOSE 4173 8000 8001
 # Start command (Railway will override this)
 CMD ["sh", "-c", "cd polish-finance-platform/polish-finance-app && pnpm run start"]
 
+
