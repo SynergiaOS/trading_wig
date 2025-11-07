@@ -3,9 +3,9 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies (use --break-system-packages for Docker containers)
 COPY code/requirements.txt ./code/
-RUN pip install --no-cache-dir -r code/requirements.txt
+RUN pip install --no-cache-dir --break-system-packages -r code/requirements.txt
 
 # Copy application code
 COPY code/analysis_api_server.py ./code/
