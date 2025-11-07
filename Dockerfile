@@ -25,9 +25,6 @@ RUN ls -la pnpm-lock.yaml 2>&1 || echo "WARNING: pnpm-lock.yaml not found" && \
         pnpm install; \
     fi
 
-# Copy frontend source
-COPY polish-finance-platform/polish-finance-app/ ./
-
 # Build frontend
 RUN pnpm run build:prod
 
