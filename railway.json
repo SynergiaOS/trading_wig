@@ -1,10 +1,11 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS"
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "Dockerfile"
   },
   "deploy": {
-    "startCommand": "cd polish-finance-platform/polish-finance-app && npm install -g pnpm && pnpm run start",
+    "startCommand": "cd polish-finance-platform/polish-finance-app && npm install -g pnpm@8 && pnpm run start",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }
