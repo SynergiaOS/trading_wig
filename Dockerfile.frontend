@@ -6,15 +6,19 @@ RUN npm install -g pnpm@latest
 
 WORKDIR /app
 
-# Copy frontend directory
-COPY polish-finance-platform/polish-finance-app/package.json polish-finance-platform/polish-finance-app/pnpm-lock.yaml* ./polish-finance-platform/polish-finance-app/
+# Copy entire frontend directory structure (includes src/lib/)
+COPY polish-finance-platform/polish-finance-app/ ./polish-finance-platform/polish-finance-app/
 
 # Install dependencies
 WORKDIR /app/polish-finance-platform/polish-finance-app
-RUN pnpm install --no-frozen-lockfile
 
-# Copy source code
-COPY polish-finance-platform/polish-finance-app/ ./polish-finance-platform/polish-finance-app/
+# Verify src/lib files are copied
+RUN echo "=== Checking src/lib files ===" && \
+    ls -la src/lib/ 2>&1 || echo "src/lib not found" && \
+    echo "=== Files in src/lib ===" && \
+    ls -la src/lib/*.ts 2>&1 || echo "No .ts files found"
+
+RUN pnpm install --no-frozen-lockfile
 
 # Build frontend
 RUN pnpm run build:prod
