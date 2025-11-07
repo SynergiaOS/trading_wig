@@ -1,0 +1,20 @@
+# Dockerfile for Backend API Service (Realtime Data)
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install dependencies
+COPY code/requirements.txt ./code/
+RUN pip install --no-cache-dir -r code/requirements.txt
+
+# Copy application code
+COPY code/realtime_api_server.py ./code/
+COPY data/ ./data/
+COPY polish-finance-platform/polish-finance-app/public/wig80_current_data.json* ./polish-finance-platform/polish-finance-app/public/ 2>/dev/null || true
+
+# Expose port (Railway will set PORT env var)
+EXPOSE 8000
+
+# Run the server
+CMD ["python3", "code/realtime_api_server.py"]
+

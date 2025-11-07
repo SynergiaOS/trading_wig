@@ -1,0 +1,21 @@
+# Dockerfile for Analysis API Service
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install dependencies
+COPY code/requirements.txt ./code/
+RUN pip install --no-cache-dir -r code/requirements.txt
+
+# Copy application code
+COPY code/analysis_api_server.py ./code/
+COPY code/telegram_alerts.py ./code/ 2>/dev/null || true
+COPY data/ ./data/
+COPY polish-finance-platform/polish-finance-app/public/wig80_current_data.json* ./polish-finance-platform/polish-finance-app/public/ 2>/dev/null || true
+
+# Expose port (Railway will set PORT env var)
+EXPOSE 8001
+
+# Run the server
+CMD ["python3", "code/analysis_api_server.py"]
+
