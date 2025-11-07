@@ -1,0 +1,935 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-05 03:35:10",
+    "total_companies": 88,
+    "data_source": "stooq.pl",
+    "original_collection_date": "2025-11-05 03:27:45"
+  },
+  "data_distribution": {
+    "pe_ratio": {
+      "count": 62,
+      "min": 5.57,
+      "max": 39.31,
+      "avg": 22.483709677419355,
+      "median": 21.76
+    },
+    "pb_ratio": {
+      "count": 62,
+      "min": 0.66,
+      "max": 9.56,
+      "avg": 5.573548387096774,
+      "median": 6.1
+    },
+    "trading_volume": {
+      "count": 88,
+      "min": 9000,
+      "max": 865940000,
+      "avg": 133252090.88636364,
+      "median": 287000
+    }
+  },
+  "original_criteria_analysis": {
+    "criteria": {
+      "pe_ratio_min": 4,
+      "pb_ratio_min": 10,
+      "trading_volume_max": 50000,
+      "description": "Original strict criteria: P/E > 4, P/B > 10, Volume < 50K"
+    },
+    "results": {
+      "pe_gt_4": [
+        {
+          "symbol": "AGO",
+          "company_name": "AGORA SA",
+          "pe_ratio": 38.19
+        },
+        {
+          "symbol": "ABS",
+          "company_name": "Asseco Business Solutions",
+          "pe_ratio": 12.2
+        },
+        {
+          "symbol": "ACS",
+          "company_name": "AC SA",
+          "pe_ratio": 13.74
+        },
+        {
+          "symbol": "AMB",
+          "company_name": "Ambra SA",
+          "pe_ratio": 11.15
+        },
+        {
+          "symbol": "APT",
+          "company_name": "Apator SA",
+          "pe_ratio": 37.39
+        },
+        {
+          "symbol": "AST",
+          "company_name": "Astarta Holding NV",
+          "pe_ratio": 16.34
+        },
+        {
+          "symbol": "APC",
+          "company_name": "Arctic Paper SA",
+          "pe_ratio": 11.81
+        },
+        {
+          "symbol": "BUM",
+          "company_name": "Bumech SA",
+          "pe_ratio": 38.33
+        },
+        {
+          "symbol": "CIG",
+          "company_name": "CI Games",
+          "pe_ratio": 8.79
+        },
+        {
+          "symbol": "CMP",
+          "company_name": "Comp SA",
+          "pe_ratio": 15.68
+        },
+        {
+          "symbol": "COG",
+          "company_name": "Cognor SA",
+          "pe_ratio": 18.98
+        },
+        {
+          "symbol": "DEC",
+          "company_name": "Decora SA",
+          "pe_ratio": 28.73
+        },
+        {
+          "symbol": "ELT",
+          "company_name": "Elektrotim SA",
+          "pe_ratio": 13.3
+        },
+        {
+          "symbol": "ERB",
+          "company_name": "Erbud SA",
+          "pe_ratio": 35.81
+        },
+        {
+          "symbol": "GRN",
+          "company_name": "Grenevia",
+          "pe_ratio": 38.63
+        },
+        {
+          "symbol": "FRO",
+          "company_name": "Ferro SA",
+          "pe_ratio": 31.23
+        },
+        {
+          "symbol": "FTE",
+          "company_name": "FORTE SA",
+          "pe_ratio": 12.97
+        },
+        {
+          "symbol": "KOG",
+          "company_name": "Kogeneracja SA",
+          "pe_ratio": 13.01
+        },
+        {
+          "symbol": "LWB",
+          "company_name": "Lubelski Wegiel Bogdanka",
+          "pe_ratio": 29.57
+        },
+        {
+          "symbol": "MCR",
+          "company_name": "Mercor SA",
+          "pe_ratio": 37.18
+        },
+        {
+          "symbol": "QRS",
+          "company_name": "Quercus TFI SA",
+          "pe_ratio": 27.94
+        },
+        {
+          "symbol": "RPG",
+          "company_name": "Rank Progress SA",
+          "pe_ratio": 32.6
+        },
+        {
+          "symbol": "SLN",
+          "company_name": "Selena FM SA",
+          "pe_ratio": 5.57
+        },
+        {
+          "symbol": "SGN",
+          "company_name": "Sygnity SA",
+          "pe_ratio": 22.64
+        },
+        {
+          "symbol": "SNZ",
+          "company_name": "ŚNIEŻKA SA",
+          "pe_ratio": 15.75
+        },
+        {
+          "symbol": "STS",
+          "company_name": "Stomil Sanok SA",
+          "pe_ratio": 13.85
+        },
+        {
+          "symbol": "STE",
+          "company_name": "Stalexport Autostrady",
+          "pe_ratio": 19.26
+        },
+        {
+          "symbol": "TOY",
+          "company_name": "Toya SA",
+          "pe_ratio": 37.57
+        },
+        {
+          "symbol": "UNB",
+          "company_name": "Unibep SA",
+          "pe_ratio": 35.26
+        },
+        {
+          "symbol": "VRG",
+          "company_name": "VRG",
+          "pe_ratio": 29.92
+        },
+        {
+          "symbol": "WLT",
+          "company_name": "Wielton SA",
+          "pe_ratio": 12.29
+        },
+        {
+          "symbol": "MAB",
+          "company_name": "Mabion",
+          "pe_ratio": 6.54
+        },
+        {
+          "symbol": "TRZ",
+          "company_name": "Tarczynski",
+          "pe_ratio": 34.28
+        },
+        {
+          "symbol": "BLB",
+          "company_name": "Bloober",
+          "pe_ratio": 16.33
+        },
+        {
+          "symbol": "MDG",
+          "company_name": "Medicalg",
+          "pe_ratio": 20.75
+        },
+        {
+          "symbol": "DAT",
+          "company_name": "Datawalk",
+          "pe_ratio": 6.62
+        },
+        {
+          "symbol": "ALL",
+          "company_name": "Ailleron",
+          "pe_ratio": 7.4
+        },
+        {
+          "symbol": "MRC",
+          "company_name": "Mercator WA",
+          "pe_ratio": 18.35
+        },
+        {
+          "symbol": "TOR",
+          "company_name": "Torpol",
+          "pe_ratio": 7.57
+        },
+        {
+          "symbol": "PCC",
+          "company_name": "PCC Rokita",
+          "pe_ratio": 13.64
+        },
+        {
+          "symbol": "UNM",
+          "company_name": "Unimot",
+          "pe_ratio": 14.28
+        },
+        {
+          "symbol": "1AT",
+          "company_name": "Atal SA",
+          "pe_ratio": 24.99
+        },
+        {
+          "symbol": "WTC",
+          "company_name": "Wittchen SA",
+          "pe_ratio": 21.76
+        },
+        {
+          "symbol": "ENT",
+          "company_name": "Enter Air",
+          "pe_ratio": 39.31
+        },
+        {
+          "symbol": "ARC",
+          "company_name": "Archicom SA",
+          "pe_ratio": 6.22
+        },
+        {
+          "symbol": "GRX",
+          "company_name": "GreenX Metals",
+          "pe_ratio": 23.0
+        },
+        {
+          "symbol": "PLW",
+          "company_name": "Playway",
+          "pe_ratio": 17.26
+        },
+        {
+          "symbol": "CLP",
+          "company_name": "Celon Pharma",
+          "pe_ratio": 15.51
+        },
+        {
+          "symbol": "CRJ",
+          "company_name": "Creepy Jar",
+          "pe_ratio": 22.41
+        },
+        {
+          "symbol": "SLV",
+          "company_name": "Selvita",
+          "pe_ratio": 26.33
+        },
+        {
+          "symbol": "DDL",
+          "company_name": "Dadelo",
+          "pe_ratio": 32.77
+        },
+        {
+          "symbol": "CPT",
+          "company_name": "Captor Therapeutics",
+          "pe_ratio": 29.15
+        },
+        {
+          "symbol": "SHP",
+          "company_name": "Shoper",
+          "pe_ratio": 27.84
+        },
+        {
+          "symbol": "CRT",
+          "company_name": "Creotech Instruments",
+          "pe_ratio": 16.72
+        },
+        {
+          "symbol": "MRP",
+          "company_name": "Murapol",
+          "pe_ratio": 28.9
+        },
+        {
+          "symbol": "VVD",
+          "company_name": "VIVID",
+          "pe_ratio": 33.41
+        },
+        {
+          "symbol": "MGT",
+          "company_name": "MANGATA",
+          "pe_ratio": 29.72
+        },
+        {
+          "symbol": "SLV",
+          "company_name": "SELVITA",
+          "pe_ratio": 20.76
+        },
+        {
+          "symbol": "DGE",
+          "company_name": "DRAGOENT",
+          "pe_ratio": 38.54
+        },
+        {
+          "symbol": "KGH",
+          "company_name": "KGHM",
+          "pe_ratio": 11.25
+        },
+        {
+          "symbol": "PKN",
+          "company_name": "PKNORLEN",
+          "pe_ratio": 29.75
+        },
+        {
+          "symbol": "PKO",
+          "company_name": "PKOBP",
+          "pe_ratio": 36.95
+        }
+      ],
+      "pb_gt_10": [],
+      "volume_lt_50k": [
+        {
+          "symbol": "BIO",
+          "company_name": "Bioton SA",
+          "volume": "43K"
+        },
+        {
+          "symbol": "AMB",
+          "company_name": "Ambra SA",
+          "volume": "19K"
+        },
+        {
+          "symbol": "AMC",
+          "company_name": "AMICA Wronki SA",
+          "volume": "9K"
+        },
+        {
+          "symbol": "BOS",
+          "company_name": "Bank Ochrony Środowiska",
+          "volume": "40K"
+        },
+        {
+          "symbol": "CIG",
+          "company_name": "CI Games",
+          "volume": "25K"
+        },
+        {
+          "symbol": "ELT",
+          "company_name": "Elektrotim SA",
+          "volume": "41K"
+        },
+        {
+          "symbol": "FRO",
+          "company_name": "Ferro SA",
+          "volume": "34K"
+        },
+        {
+          "symbol": "MCR",
+          "company_name": "Mercor SA",
+          "volume": "39K"
+        },
+        {
+          "symbol": "QRS",
+          "company_name": "Quercus TFI SA",
+          "volume": "39K"
+        },
+        {
+          "symbol": "STS",
+          "company_name": "Stomil Sanok SA",
+          "volume": "37K"
+        },
+        {
+          "symbol": "WWL",
+          "company_name": "WAWEL SA",
+          "volume": "19K"
+        },
+        {
+          "symbol": "MAB",
+          "company_name": "Mabion",
+          "volume": "41K"
+        },
+        {
+          "symbol": "PCC",
+          "company_name": "PCC Rokita",
+          "volume": "34K"
+        },
+        {
+          "symbol": "GRX",
+          "company_name": "GreenX Metals",
+          "volume": "35K"
+        },
+        {
+          "symbol": "CLP",
+          "company_name": "Celon Pharma",
+          "volume": "49K"
+        },
+        {
+          "symbol": "MOL",
+          "company_name": "Molecure",
+          "volume": "23K"
+        },
+        {
+          "symbol": "SLV",
+          "company_name": "Selvita",
+          "volume": "21K"
+        },
+        {
+          "symbol": "DDL",
+          "company_name": "Dadelo",
+          "volume": "48K"
+        },
+        {
+          "symbol": "OND",
+          "company_name": "Onde",
+          "volume": "26K"
+        },
+        {
+          "symbol": "PKN",
+          "company_name": "PKNORLEN",
+          "volume": "37K"
+        }
+      ],
+      "all_criteria": []
+    },
+    "summary": {
+      "companies_meeting_pe_criteria": 62,
+      "companies_meeting_pb_criteria": 0,
+      "companies_meeting_volume_criteria": 20,
+      "companies_meeting_all_criteria": 0
+    }
+  },
+  "alternative_opportunities": {
+    "description": "More realistic investment opportunities based on market conditions",
+    "categories": {
+      "small_cap_value": [
+        {
+          "company_name": "Selena FM SA",
+          "symbol": "SLN",
+          "current_price": 177.97,
+          "change_percent": 10.59,
+          "pe_ratio": 5.57,
+          "pb_ratio": 1.47,
+          "trading_volume": "85K",
+          "trading_volume_numeric": 85000,
+          "value_score": 0.8767333333333333,
+          "growth_score": 0.5717222222222222,
+          "liquidity_score": 0.6,
+          "small_cap_score": 0.2783833333333333,
+          "overall_score": 0.5756129629629628,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Kogeneracja SA",
+          "symbol": "KOG",
+          "current_price": 284.74,
+          "change_percent": 10.3,
+          "pe_ratio": 13.01,
+          "pb_ratio": 7.61,
+          "trading_volume": "64K",
+          "trading_volume_numeric": 64000,
+          "value_score": 0.5728666666666666,
+          "growth_score": 0.8162222222222223,
+          "liquidity_score": 0.6,
+          "small_cap_score": 0.2054333333333333,
+          "overall_score": 0.5315074074074074,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "GreenX Metals",
+          "symbol": "GRX",
+          "current_price": 403.39,
+          "change_percent": -1.2,
+          "pe_ratio": 23.0,
+          "pb_ratio": 4.32,
+          "trading_volume": "35K",
+          "trading_volume_numeric": 35000,
+          "value_score": 0.38266666666666665,
+          "growth_score": 0.7355555555555555,
+          "liquidity_score": 0.3,
+          "small_cap_score": 0.325,
+          "overall_score": 0.48107407407407404,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Medicalg",
+          "symbol": "MDG",
+          "current_price": 292.24,
+          "change_percent": -1.13,
+          "pe_ratio": 20.75,
+          "pb_ratio": 6.11,
+          "trading_volume": "76K",
+          "trading_volume_numeric": 76000,
+          "value_score": 0.5196666666666666,
+          "growth_score": 0.7117222222222223,
+          "liquidity_score": 0.6,
+          "small_cap_score": 0.13293333333333332,
+          "overall_score": 0.45477407407407405,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Celon Pharma",
+          "symbol": "CLP",
+          "current_price": 323.49,
+          "change_percent": -1.01,
+          "pe_ratio": 15.51,
+          "pb_ratio": 5.47,
+          "trading_volume": "49K",
+          "trading_volume_numeric": 49000,
+          "value_score": 0.4442,
+          "growth_score": 0.6555,
+          "liquidity_score": 0.3,
+          "small_cap_score": 0.255,
+          "overall_score": 0.4515666666666666,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Astarta Holding NV",
+          "symbol": "AST",
+          "current_price": 295.15,
+          "change_percent": -8.5,
+          "pe_ratio": 16.34,
+          "pb_ratio": 7.39,
+          "trading_volume": "51K",
+          "trading_volume_numeric": 51000,
+          "value_score": 0.5357999999999999,
+          "growth_score": 0.5398888888888889,
+          "liquidity_score": 0.6,
+          "small_cap_score": 0.2530833333333334,
+          "overall_score": 0.442924074074074,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Ambra SA",
+          "symbol": "AMB",
+          "current_price": 450.12,
+          "change_percent": -13.89,
+          "pe_ratio": 11.15,
+          "pb_ratio": 6.78,
+          "trading_volume": "19K",
+          "trading_volume_numeric": 19000,
+          "value_score": 0.4586666666666666,
+          "growth_score": 0.4572222222222222,
+          "liquidity_score": 0.3,
+          "small_cap_score": 0.405,
+          "overall_score": 0.44029629629629624,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "CI Games",
+          "symbol": "CIG",
+          "current_price": 586.58,
+          "change_percent": -12.1,
+          "pe_ratio": 8.79,
+          "pb_ratio": 6.74,
+          "trading_volume": "25K",
+          "trading_volume_numeric": 25000,
+          "value_score": 0.4914666666666667,
+          "growth_score": 0.431,
+          "liquidity_score": 0.3,
+          "small_cap_score": 0.375,
+          "overall_score": 0.4324888888888889,
+          "last_update": "17:10:00"
+        }
+      ],
+      "growth_potential": [
+        {
+          "company_name": "DRAGOENT",
+          "symbol": "DGE",
+          "current_price": 472.41,
+          "change_percent": 11.68,
+          "pe_ratio": 38.54,
+          "pb_ratio": 8.22,
+          "trading_volume": "52.43M",
+          "trading_volume_numeric": 52430000,
+          "value_score": 0.22599999999999998,
+          "growth_score": 1.028,
+          "liquidity_score": 1.0,
+          "small_cap_score": 0.0,
+          "overall_score": 0.418,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Shoper",
+          "symbol": "SHP",
+          "current_price": 469.71,
+          "change_percent": 12.82,
+          "pe_ratio": 27.84,
+          "pb_ratio": 4.68,
+          "trading_volume": "483K",
+          "trading_volume_numeric": 483000,
+          "value_score": 0.5106666666666667,
+          "growth_score": 1.023,
+          "liquidity_score": 0.8,
+          "small_cap_score": 0.0,
+          "overall_score": 0.5112222222222221,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Selvita",
+          "symbol": "SLV",
+          "current_price": 585.26,
+          "change_percent": 9.95,
+          "pe_ratio": 26.33,
+          "pb_ratio": 6.1,
+          "trading_volume": "21K",
+          "trading_volume_numeric": 21000,
+          "value_score": 0.2966666666666667,
+          "growth_score": 0.9583888888888888,
+          "liquidity_score": 0.3,
+          "small_cap_score": 0.395,
+          "overall_score": 0.5500185185185186,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Erbud SA",
+          "symbol": "ERB",
+          "current_price": 616.37,
+          "change_percent": 14.94,
+          "pe_ratio": 35.81,
+          "pb_ratio": 2.9,
+          "trading_volume": "525.41M",
+          "trading_volume_numeric": 525409999,
+          "value_score": 0.4033333333333333,
+          "growth_score": 0.9156666666666666,
+          "liquidity_score": 1.0,
+          "small_cap_score": 0.0,
+          "overall_score": 0.43966666666666665,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "PKNORLEN",
+          "symbol": "PKN",
+          "current_price": 388.5,
+          "change_percent": 13.76,
+          "pe_ratio": 29.75,
+          "pb_ratio": 2.25,
+          "trading_volume": "37K",
+          "trading_volume_numeric": 37000,
+          "value_score": 0.425,
+          "growth_score": 0.8932222222222223,
+          "liquidity_score": 0.3,
+          "small_cap_score": 0.315,
+          "overall_score": 0.5444074074074073,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Enter Air",
+          "symbol": "ENT",
+          "current_price": 440.37,
+          "change_percent": 3.3,
+          "pe_ratio": 39.31,
+          "pb_ratio": 9.02,
+          "trading_volume": "82K",
+          "trading_volume_numeric": 82000,
+          "value_score": 0.36600000000000005,
+          "growth_score": 0.8883333333333333,
+          "liquidity_score": 0.6,
+          "small_cap_score": 0.09,
+          "overall_score": 0.4481111111111111,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "AGORA SA",
+          "symbol": "AGO",
+          "current_price": 419.96,
+          "change_percent": 3.04,
+          "pe_ratio": 38.19,
+          "pb_ratio": 4.73,
+          "trading_volume": "246K",
+          "trading_volume_numeric": 246000,
+          "value_score": 0.509,
+          "growth_score": 0.884,
+          "liquidity_score": 0.8,
+          "small_cap_score": 0.0,
+          "overall_score": 0.4643333333333333,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Mercator WA",
+          "symbol": "MRC",
+          "current_price": 124.94,
+          "change_percent": 10.54,
+          "pe_ratio": 18.35,
+          "pb_ratio": 8.21,
+          "trading_volume": "810.36M",
+          "trading_volume_numeric": 810360000,
+          "value_score": 0.31499999999999995,
+          "growth_score": 0.8795555555555555,
+          "liquidity_score": 1.0,
+          "small_cap_score": 0.2917666666666667,
+          "overall_score": 0.4954407407407408,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Grenevia",
+          "symbol": "GRN",
+          "current_price": 500.29,
+          "change_percent": 0.68,
+          "pe_ratio": 38.63,
+          "pb_ratio": 4.97,
+          "trading_volume": "77K",
+          "trading_volume_numeric": 77000,
+          "value_score": 0.501,
+          "growth_score": 0.8446666666666666,
+          "liquidity_score": 0.6,
+          "small_cap_score": 0.115,
+          "overall_score": 0.48688888888888887,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Rank Progress SA",
+          "symbol": "RPG",
+          "current_price": 52.47,
+          "change_percent": -0.11,
+          "pe_ratio": 32.6,
+          "pb_ratio": 4.87,
+          "trading_volume": "97K",
+          "trading_volume_numeric": 97000,
+          "value_score": 0.5043333333333333,
+          "growth_score": 0.8315,
+          "liquidity_score": 0.6,
+          "small_cap_score": 0.42755000000000004,
+          "overall_score": 0.5877944444444445,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Kogeneracja SA",
+          "symbol": "KOG",
+          "current_price": 284.74,
+          "change_percent": 10.3,
+          "pe_ratio": 13.01,
+          "pb_ratio": 7.61,
+          "trading_volume": "64K",
+          "trading_volume_numeric": 64000,
+          "value_score": 0.5728666666666666,
+          "growth_score": 0.8162222222222223,
+          "liquidity_score": 0.6,
+          "small_cap_score": 0.2054333333333333,
+          "overall_score": 0.5315074074074074,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "KGHM",
+          "symbol": "KGH",
+          "current_price": 157.8,
+          "change_percent": 10.52,
+          "pe_ratio": 11.25,
+          "pb_ratio": 6.66,
+          "trading_volume": "865K",
+          "trading_volume_numeric": 865000,
+          "value_score": 0.4613333333333333,
+          "growth_score": 0.8003333333333332,
+          "liquidity_score": 1.0,
+          "small_cap_score": 0.237,
+          "overall_score": 0.4995555555555555,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Unibep SA",
+          "symbol": "UNB",
+          "current_price": 652.25,
+          "change_percent": -2.29,
+          "pe_ratio": 35.26,
+          "pb_ratio": 4.43,
+          "trading_volume": "966K",
+          "trading_volume_numeric": 966000,
+          "value_score": 0.35233333333333333,
+          "growth_score": 0.7951666666666667,
+          "liquidity_score": 1.0,
+          "small_cap_score": 0.0,
+          "overall_score": 0.3825,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Elektrotim SA",
+          "symbol": "ELT",
+          "current_price": 121.42,
+          "change_percent": 7.04,
+          "pe_ratio": 13.3,
+          "pb_ratio": 9.23,
+          "trading_volume": "41K",
+          "trading_volume_numeric": 41000,
+          "value_score": 0.34833333333333333,
+          "growth_score": 0.7651111111111111,
+          "liquidity_score": 0.3,
+          "small_cap_score": 0.5926333333333333,
+          "overall_score": 0.5686925925925926,
+          "last_update": "17:10:00"
+        },
+        {
+          "company_name": "Quercus TFI SA",
+          "symbol": "QRS",
+          "current_price": 428.62,
+          "change_percent": -3.7,
+          "pe_ratio": 27.94,
+          "pb_ratio": 8.0,
+          "trading_volume": "39K",
+          "trading_volume_numeric": 39000,
+          "value_score": 0.2333333333333333,
+          "growth_score": 0.7487777777777778,
+          "liquidity_score": 0.3,
+          "small_cap_score": 0.305,
+          "overall_score": 0.42903703703703705,
+          "last_update": "17:10:00"
+        }
+      ],
+      "liquid_value": [
+        {
+          "company_name": "KGHM",
+          "symbol": "KGH",
+          "current_price": 157.8,
+          "change_percent": 10.52,
+          "pe_ratio": 11.25,
+          "pb_ratio": 6.66,
+          "trading_volume": "865K",
+          "trading_volume_numeric": 865000,
+          "value_score": 0.4613333333333333,
+          "growth_score": 0.8003333333333332,
+          "liquidity_score": 1.0,
+          "small_cap_score": 0.237,
+          "overall_score": 0.4995555555555555,
+          "last_update": "17:10:00"
+        }
+      ]
+    }
+  },
+  "recommendations": {
+    "primary_recommendations": [
+      {
+        "symbol": "SLN",
+        "company_name": "Selena FM SA",
+        "rationale": "Small-cap value opportunity with reasonable valuation",
+        "price_target": 231.36100000000002,
+        "risk_level": "Medium",
+        "investment_thesis": "Trading at P/E 5.6, P/B 1.5 with good growth potential"
+      },
+      {
+        "symbol": "KOG",
+        "company_name": "Kogeneracja SA",
+        "rationale": "Small-cap value opportunity with reasonable valuation",
+        "price_target": 370.16200000000003,
+        "risk_level": "Medium",
+        "investment_thesis": "Trading at P/E 13.0, P/B 7.6 with good growth potential"
+      },
+      {
+        "symbol": "GRX",
+        "company_name": "GreenX Metals",
+        "rationale": "Small-cap value opportunity with reasonable valuation",
+        "price_target": 524.407,
+        "risk_level": "Medium",
+        "investment_thesis": "Trading at P/E 23.0, P/B 4.3 with good growth potential"
+      },
+      {
+        "symbol": "MDG",
+        "company_name": "Medicalg",
+        "rationale": "Small-cap value opportunity with reasonable valuation",
+        "price_target": 379.91200000000003,
+        "risk_level": "Medium",
+        "investment_thesis": "Trading at P/E 20.8, P/B 6.1 with good growth potential"
+      },
+      {
+        "symbol": "CLP",
+        "company_name": "Celon Pharma",
+        "rationale": "Small-cap value opportunity with reasonable valuation",
+        "price_target": 420.53700000000003,
+        "risk_level": "Medium",
+        "investment_thesis": "Trading at P/E 15.5, P/B 5.5 with good growth potential"
+      }
+    ],
+    "secondary_picks": [
+      {
+        "symbol": "DGE",
+        "company_name": "DRAGOENT",
+        "rationale": "Growth potential with positive momentum",
+        "price_target": 708.615,
+        "risk_level": "Medium-High",
+        "investment_thesis": "Growth profile with P/E 38.5 and recent performance of +11.7%"
+      },
+      {
+        "symbol": "SHP",
+        "company_name": "Shoper",
+        "rationale": "Growth potential with positive momentum",
+        "price_target": 704.5649999999999,
+        "risk_level": "Medium-High",
+        "investment_thesis": "Growth profile with P/E 27.8 and recent performance of +12.8%"
+      },
+      {
+        "symbol": "SLV",
+        "company_name": "Selvita",
+        "rationale": "Growth potential with positive momentum",
+        "price_target": 877.89,
+        "risk_level": "Medium-High",
+        "investment_thesis": "Growth profile with P/E 26.3 and recent performance of +9.9%"
+      }
+    ],
+    "caution_flags": []
+  },
+  "risk_analysis": {
+    "market_overview": "Small-cap Polish stocks show varied valuations",
+    "liquidity_concerns": "Many companies have limited trading volume",
+    "valuation_risk": "High P/B ratios may indicate overvaluation in some sectors",
+    "diversification": "Spread investments across different sectors and market caps"
+  }
+}

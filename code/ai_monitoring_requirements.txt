@@ -1,0 +1,30 @@
+# AI Monitoring Dashboard Requirements
+# Core web framework
+Flask==2.3.3
+Flask-SocketIO==5.3.6
+
+# Data visualization
+plotly==5.17.0
+numpy==1.24.3
+pandas==2.0.3
+
+# Data processing
+scipy==1.11.3
+
+# Database
+# sqlite3 is included in Python standard library
+
+# HTTP requests
+requests==2.31.0
+
+# Async support
+python-socketio==5.8.0
+eventlet==0.33.3
+
+# Development and testing
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Optional: For enhanced performance
+# redis==5.0.1
+# celery==5.3.4

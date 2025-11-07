@@ -1,0 +1,416 @@
+{
+  "knowledge_base_metadata": {
+    "title": "Polish Financial Market & WIG80 Companies Knowledge Base",
+    "created_date": "2025-11-06",
+    "last_updated": "2025-11-06 21:00:00",
+    "version": "1.0",
+    "coverage": "Comprehensive research on Polish stock market, WIG80 companies, regulations, and economic indicators"
+  },
+  "market_overview": {
+    "primary_exchange": {
+      "name": "Warsaw Stock Exchange (GPW)",
+      "full_name": "Giełda Papierów Wartościowych w Warszawie",
+      "founded": 1817,
+      "current_index_value": "111,560 (WIG index as of Nov 5, 2025)",
+      "website": "https://www.gpw.pl"
+    },
+    "main_indices": {
+      "WIG20": {
+        "description": "Large-cap index of 20 largest companies",
+        "market_cap_weight": "Approximately 50% of total market cap"
+      },
+      "mWIG40": {
+        "description": "Mid-cap index of 40 medium-sized companies"
+      },
+      "sWIG80": {
+        "description": "Small-cap index of 80 smaller companies",
+        "current_value": "29,896.02 (+0.20% as of Nov 6, 2025)",
+        "total_companies": 80,
+        "focus": "Second-tier companies after WIG20 and mWIG40"
+      }
+    }
+  },
+  "wig80_companies": {
+    "extraction_date": "2025-11-06 20:53:58",
+    "index_value": "29,896.02",
+    "daily_change": "+59.05 (+0.20%)",
+    "total_companies": 80,
+    "top_performers": [
+      {
+        "rank": 1,
+        "company": "Bumech SA",
+        "ticker": "bumech",
+        "price": 30.65,
+        "change": 10.25
+      },
+      {
+        "rank": 2,
+        "company": "Onde",
+        "ticker": "onde", 
+        "price": 8.69,
+        "change": 4.32
+      },
+      {
+        "rank": 3,
+        "company": "Murapol",
+        "ticker": "murapol",
+        "price": 38.55,
+        "change": 3.21
+      }
+    ],
+    "highest_priced_stocks": [
+      {
+        "rank": 1,
+        "company": "WAWEL SA",
+        "ticker": "wawel",
+        "price": 700.00
+      },
+      {
+        "rank": 2,
+        "company": "Vigo System",
+        "ticker": "vigosys", 
+        "price": 512.00
+      },
+      {
+        "rank": 3,
+        "company": "Creotech Instruments",
+        "ticker": "creotech-instruments",
+        "price": 385.00
+      }
+    ],
+    "most_active_by_volume": [
+      {
+        "rank": 1,
+        "company": "Stalexport Autostrady",
+        "ticker": "stalexport-autostrady",
+        "volume": 303610
+      },
+      {
+        "rank": 2,
+        "company": "GreenX Metals",
+        "ticker": "prairie-downs-metals-ltd",
+        "volume": 87600
+      },
+      {
+        "rank": 3,
+        "company": "Polimex-Mostostal",
+        "ticker": "polimex-mostostal", 
+        "volume": 237120
+      }
+    ],
+    "companies_by_sector_analysis": {
+      "technology": [
+        "Asseco Business Solutions (87.00 PLN)",
+        "Comp SA (57.80 PLN)",
+        "Datawalk (90.00 PLN)",
+        "Creotech Instruments (385.00 PLN)",
+        "Vigo System (512.00 PLN)"
+      ],
+      "pharmaceuticals_biotech": [
+        "Bioton SA (4.19 PLN)",
+        "Mabion (7.94 PLN)",
+        "Ryvu (24.10 PLN)",
+        "Synthaverse (4.155 PLN)",
+        "Medicalg (31.80 PLN)",
+        "Selvita (40.60 PLN)",
+        "Celon Pharma (21.70 PLN)",
+        "Scope Fluidics (152.00 PLN)",
+        "Molecure (6.18 PLN)",
+        "Captor Therapeutics (47.10 PLN)",
+        "Bioceltix (96.90 PLN)"
+      ],
+      "gaming_entertainment": [
+        "CI Games (2.86 PLN)",
+        "Playway SA (263.50 PLN)",
+        "Bloober (25.60 PLN)"
+      ],
+      "banking": [
+        "Bank Ochrony Środowiska (12.24 PLN)"
+      ],
+      "energy_utilities": [
+        "Grenevia (3.04 PLN)",
+        "Lubelski Wegiel Bogdanka (21.35 PLN)",
+        "Kogeneracja SA (64.70 PLN)",
+        "Zespol Elektrowni Patnow Adamow Konin (21.95 PLN)",
+        "Unimot (127.80 PLN)"
+      ],
+      "construction_real_estate": [
+        "Echo Investment SA (5.92 PLN)",
+        "Atal SA (58.80 PLN)",
+        "Archicom SA (47.30 PLN)"
+      ],
+      "automotive_transportation": [
+        "Wielton SA (6.85 PLN)",
+        "Stalexport Autostrady (3.06 PLN)",
+        "Enter Air (52.90 PLN)"
+      ],
+      "manufacturing": [
+        "AMICA Wronki SA (56.50 PLN)",
+        "Decora SA (68.60 PLN)",
+        "Selena FM SA (38.70 PLN)",
+        "Wielton SA (6.85 PLN)"
+      ],
+      "food_beverage": [
+        "WAWEL SA (700.00 PLN)",
+        "Ambra SA (18.14 PLN)"
+      ],
+      "retail": [
+        "Wittchen SA (17.00 PLN)",
+        "VRG (4.43 PLN)"
+      ],
+      "materials_mining": [
+        "Cognor SA (6.685 PLN)",
+        "Stalprodukt SA (264.00 PLN)",
+        "Boryszew SA (5.98 PLN)",
+        "PCC Rokita (69.20 PLN)",
+        "GreenX Metals (1.958 PLN)"
+      ]
+    }
+  },
+  "trading_regulations_structure": {
+    "trading_hours": {
+      "main_market": {
+        "shares": "09:00 - 16:50",
+        "derivatives": "08:45 - 16:50",
+        "special_features": "Pre-auction (08:55-09:00), Trading at last (16:50)"
+      },
+      "newconnect": {
+        "trading_hours": "09:00 - 16:50"
+      },
+      "globalconnect": {
+        "trading_hours": "09:05 - 17:05",
+        "description": "Extended hours for international companies"
+      }
+    },
+    "trading_modes": {
+      "continuous_trading": {
+        "description": "Standard real-time order matching",
+        "available": "All major market segments"
+      },
+      "single_price_auction": {
+        "description": "Call auction with single price determination",
+        "subtypes": ["Double Auction (11:30-15:00)", "Single Auction (08:30-17:05)"]
+      }
+    },
+    "market_segments": {
+      "main_market": {
+        "indices": ["WIG20", "mWIG40", "sWIG80"],
+        "instruments": ["Shares", "ETFs", "Derivatives", "Structured products"]
+      },
+      "newconnect": {
+        "description": "Alternative market for smaller companies",
+        "focus": "Growth companies, start-ups"
+      },
+      "catalyst": {
+        "description": "Bond market",
+        "currencies": ["PLN", "EUR"]
+      }
+    }
+  },
+  "economic_indicators_2024": {
+    "gdp_growth": {
+      "2024_actual": "2.9%",
+      "2025_forecast": "3.2%",
+      "2026_forecast": "3.4%",
+      "description": "Strong economic growth driven by private consumption and external sector recovery"
+    },
+    "inflation": {
+      "2024_rate": "3.7%",
+      "2025_forecast": "3.6%",
+      "description": "Significant disinflation from 11.4% in 2023 to 3.6% in 2024"
+    },
+    "interest_rates": {
+      "current_expectation": "4.50% (end of Q4 2024)",
+      "policy_stance": "Neutral to slightly accommodative"
+    },
+    "exchange_rates": {
+      "pln_eur": "4.257 (as of latest data)",
+      "pln_usd": "3.75 (as of latest data)",
+      "trends": "Zloty appreciated 1.2% in 2024 using trade-weighted rates despite 2.5% depreciation against USD"
+    },
+    "investment_climate": {
+      "fdi_confidence_rank": "23rd globally, 7th among emerging markets",
+      "key_strengths": "Technological advancement, EU integration, skilled workforce"
+    }
+  },
+  "major_companies_market_caps_2024": {
+    "top_10_largest_polish_companies": [
+      {
+        "rank": 1,
+        "company": "PKO BANK POLSKI",
+        "market_cap_usd": 18.2,
+        "sector": "Banking"
+      },
+      {
+        "rank": 2, 
+        "company": "ORLEN SPÓŁKA AKCYJNA",
+        "sector": "Oil & Gas"
+      },
+      {
+        "rank": 3,
+        "company": "PZU",
+        "sector": "Insurance"
+      },
+      {
+        "rank": 4,
+        "company": "PEPCO GROUP",
+        "sector": "Retail"
+      },
+      {
+        "rank": 5,
+        "company": "BUDIMEX",
+        "sector": "Construction"
+      }
+    ]
+  },
+  "sector_performance_analysis": {
+    "banking_sector": {
+      "key_players": ["PKO Bank Polski", "Bank Millennium", "Bank Handlowy"],
+      "market_outlook": "Strong recovery with above-market growth in 2024",
+      "total_assets": "PLN 1.92 trillion in deposits (Q2 2023)",
+      "net_interest_income_forecast": "US$37.59bn in 2025"
+    },
+    "insurance_sector": {
+      "market_leader": "PZU with 21% market share",
+      "assets_under_management": "PLN 163 billion",
+      "second_largest": "Allianz with PLN 97 billion AuM",
+      "outlook": "Robust momentum throughout 2024-2025"
+    },
+    "energy_sector": {
+      "key_companies": ["ORLEN", "TAURON", "PGE"],
+      "trends": "Focus on renewable transition, energy security post-Ukraine war",
+      "market_impact": "Energy sector was major driver of WIG index gains in 2024"
+    },
+    "technology_sector": {
+      "growth_areas": ["Fintech", "Software development", "Gaming"],
+      "notable_companies": ["Asseco Poland", "CD Projekt", "Playway"],
+      "outlook": "Strong growth potential with digital transformation"
+    }
+  },
+  "historical_market_events": {
+    "2024_key_events": [
+      {
+        "event": "WIG Index breaks 100,000 points",
+        "date": "April 2025",
+        "impact": "First time in history, significant milestone",
+        "drivers": ["Strong performance by Orlen (+44.7%)", "Financial sector gains"]
+      },
+      {
+        "event": "Record GPW revenue",
+        "date": "2024",
+        "value": "PLN 464.8 million",
+        "growth": "4.5% year-on-year"
+      },
+      {
+        "event": "Trading halt incident",
+        "date": "April 2025", 
+        "duration": "1 hour (13:15-14:15 GMT)",
+        "reason": "Security reasons"
+      }
+    ],
+    "2020_2021_pandemic_impact": {
+      "description": "Significant volatility due to COVID-19 pandemic",
+      "market_recovery": "Strong rebound post-initial shock",
+      "sectors_affected": "All sectors, particularly travel, hospitality, retail"
+    },
+    "ukraine_war_impact": {
+      "immediate_effects": [
+        "5% increase in EUR/PLN exchange rate in first two weeks",
+        "0.33 percentage point increase in inflation due to weaker PLN",
+        "Energy security concerns affecting utility companies"
+      ],
+      "long_term_implications": [
+        "Increased defense spending benefiting defense contractors",
+        "Investment in energy independence",
+        "Refugee integration affecting labor market"
+      ]
+    },
+    "recent_market_trends": [
+      "WIG20 underperformed over past decade (lost years)",
+      "Strong recovery in 2024-2025 period", 
+      "Increased foreign investment interest",
+      "Tech sector outperformance",
+      "Banking sector normalization after 2023 challenges"
+    ]
+  },
+  "foreign_investment_regulations": {
+    "general_framework": {
+      "investment_freedom": "Foreign investors can freely invest in securities admitted to public trading",
+      "exceptions": "Some cases related to investors from specific countries or sectors",
+      "eu_integration": "Full capital mobility within EU"
+    },
+    "fdi_screening_regime": {
+      "established": "2020 (24-month period, now permanent)",
+      "oversight": "Ministry of Finance",
+      "scope": "Strategic sectors including banking, insurance, energy",
+      "purpose": "National security and critical infrastructure protection"
+    },
+    "sector_restrictions": {
+      "defense": "Foreign investment restrictions in defense sector",
+      "critical_infrastructure": "Screening for telecoms, energy, transport",
+      "financial_services": "Some restrictions on non-EU banking investments"
+    }
+  },
+  "market_microstructure": {
+    "order_types": ["Market orders", "Limit orders", "Stop orders", "Stop-limit orders"],
+    "price_determination": "Continuous double auction system",
+    "settlement": "T+2 for most securities",
+    "currency_denomination": "Polish Zloty (PLN) for domestic trading",
+    "tick_sizes": "Varies by price level (0.01 PLN for most stocks)",
+    "circuit_breakers": "Price limit bands to prevent excessive volatility"
+  },
+  "investor_composition": {
+    "foreign_investors": "Significant portion of trading volume",
+    "domestic_institutional": "Pension funds, insurance companies, investment funds",
+    "retail_investors": "Growing participation, especially in tech and growth stocks",
+    "market_liquidity": "High for large caps, moderate for mid caps, lower for small caps"
+  },
+  "regulatory_oversight": {
+    "primary_regulator": "Polish Financial Supervision Authority (KNF)",
+    "exchange_oversight": "GPW operates under KNF supervision", 
+    "market_abuse_regulations": "EU MAR (Market Abuse Regulation) implementation",
+    "transparency_requirements": "Regular reporting, insider lists, disclosure requirements"
+  },
+  "taxation": {
+    "dividend_tax": "19% withholding tax for domestic shareholders",
+    "capital_gains": "19% tax on profits from stock sales (residents)",
+    "double_taxation_treaties": "Extensive network to avoid double taxation"
+  },
+  "future_outlook": {
+    "positive_factors": [
+      "Strong GDP growth forecasts (3.2-3.4% through 2026)",
+      "Controlled inflation environment (3.6-3.7%)", 
+      "EU fund absorption acceleration",
+      "Digital transformation opportunities",
+      "Energy transition investments"
+    ],
+    "risk_factors": [
+      "Geopolitical tensions (Ukraine war)",
+      "Global economic slowdown impacts",
+      "Regulatory uncertainty in some sectors",
+      "Exchange rate volatility",
+      "Investment levels below EU average (under 17% of GDP)"
+    ],
+    "investment_themes": [
+      "Energy transition and renewables",
+      "Digital infrastructure and fintech",
+      "Healthcare and pharmaceuticals",
+      "E-commerce and consumer tech",
+      "Infrastructure and construction"
+    ]
+  },
+  "data_sources": [
+    "Warsaw Stock Exchange (GPW) official website",
+    "Investing.com WIG80 components",
+    "European Commission Economic Forecasts",
+    "Trading Economics Poland indicators", 
+    "Polish Financial Supervision Authority (KNF)",
+    "Bloomberg and Reuters market data",
+    "Company annual reports and filings",
+    "IMF Article IV reports",
+    "OECD Economic Outlook",
+    "National Bank of Poland (NBP) data"
+  ],
+  "last_updated": "2025-11-06 21:00:00",
+  "next_update_scheduled": "2025-12-06"
+}

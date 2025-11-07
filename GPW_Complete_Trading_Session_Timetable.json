@@ -1,0 +1,260 @@
+{
+  "title": "Warsaw Stock Exchange (GPW) - Complete Trading Session Timetable",
+  "extraction_date": "2025-11-06 21:20:00",
+  "source_url": "https://www.gpw.pl/session-details",
+  "market_phases": {
+    "general_phases": [
+      "Opening call",
+      "Trading session", 
+      "Closing call",
+      "Trading at last",
+      "End of session",
+      "Change of the timetable"
+    ],
+    "phase_descriptions": {
+      "opening_call": "Pre-opening phase where orders are collected but not executed",
+      "trading_session": "Main continuous trading period with real-time order execution",
+      "closing_call": "Final order collection phase before market close",
+      "trading_at_last": "Trading at the last price allowed",
+      "end_of_session": "Final closure of trading activities"
+    }
+  },
+  "trading_sessions": {
+    "GPW_Continuous_Trading": {
+      "main_session_hours": "09:00 - 16:50",
+      "instruments": {
+        "WIG20_Shares": {
+          "trading_hours": "09:00 - 16:50",
+          "phase_details": {
+            "opening_call": "08:55 - 09:00",
+            "trading_session": "09:00 - 16:50", 
+            "closing_call": "16:50 - 16:50",
+            "trading_at_last": "16:50 - 16:50"
+          }
+        },
+        "mWIG40_Shares": {
+          "trading_hours": "09:00 - 16:50",
+          "phase_details": {
+            "opening_call": "08:55 - 09:00",
+            "trading_session": "09:00 - 16:50",
+            "closing_call": "16:50 - 16:50", 
+            "trading_at_last": "16:50 - 16:50"
+          }
+        },
+        "sWIG80_Shares": {
+          "trading_hours": "09:00 - 16:50",
+          "phase_details": {
+            "opening_call": "08:55 - 09:00",
+            "trading_session": "09:00 - 16:50",
+            "closing_call": "16:50 - 16:50",
+            "trading_at_last": "16:50 - 16:50"
+          }
+        },
+        "RegS_Shares": {
+          "trading_hours": "09:00 - 16:50"
+        },
+        "Remaining_Shares_Continuous": {
+          "trading_hours": "09:00 - 16:50"
+        },
+        "Investment_Certificates": {
+          "trading_hours": "09:00 - 16:50"
+        },
+        "ETF": {
+          "trading_hours": "09:05 - 16:50"
+        },
+        "ETC_ETN": {
+          "trading_hours": "09:05 - 16:50"
+        },
+        "Index_Futures": {
+          "trading_hours": "08:45 - 16:50"
+        },
+        "Stock_Futures": {
+          "trading_hours": "08:45 - 16:50",
+          "detailed_phases": {
+            "opening_call": "08:30 - 08:45",
+            "opening": "08:45",
+            "trading_session": "08:45 - 16:50",
+            "closing_call": "16:50 - 17:00", 
+            "closing": "17:00",
+            "trading_at_last": "17:00 - 17:05"
+          }
+        },
+        "Currency_Futures": {
+          "trading_hours": "08:45 - 16:50"
+        },
+        "Index_Options": {
+          "trading_hours": "08:45 - 16:50"
+        },
+        "Turbo_Certificates": {
+          "trading_hours": "09:05 - 16:50"
+        },
+        "Leveraged_Certificates": {
+          "trading_hours": "09:05 - 16:50"
+        },
+        "Warrants": {
+          "trading_hours": "09:05 - 16:50"
+        },
+        "Investment_Products": {
+          "trading_hours": "09:05 - 16:50"
+        },
+        "Investment_Structured_Bonds": {
+          "trading_hours": "09:05 - 16:50"
+        }
+      }
+    },
+    "GPW_Single_Price_Auction": {
+      "Shares_Double_Auction": {
+        "opening_call": "11:30 - 15:00"
+      }
+    },
+    "GPW_Single_Price_Auction_1_Fix": {
+      "Shares_Single_Auction": {
+        "opening_call": "08:30 - 17:05"
+      }
+    },
+    "NewConnect_Continuous_Trading": {
+      "NewConnect_Continuous": {
+        "trading_hours": "09:00 - 16:50"
+      }
+    },
+    "NewConnect_Single_Price_Auction": {
+      "NewConnect_Double_Auction": {
+        "opening_call": "11:30 - 15:00"
+      }
+    },
+    "NewConnect_Single_Price_Auction_1_Fix": {
+      "Shares_Single_Auction": {
+        "opening_call": "08:30 - 17:05"
+      }
+    },
+    "Catalyst_Continuous_Trading": {
+      "Catalyst_Continuous": {
+        "trading_hours": "09:00 - 16:50"
+      },
+      "Catalyst_Continuous_EUR": {
+        "trading_hours": "09:00 - 16:50"
+      },
+      "GPW_Catalyst_ASO": {
+        "trading_hours": "09:00 - 16:50"
+      },
+      "Catalyst_Continuous_EUR_duplicate": {
+        "trading_hours": "09:00 - 16:50"
+      }
+    },
+    "GlobalConnect_Continuous_Trading": {
+      "GlobalConnect_Shares": {
+        "trading_hours": "09:05 - 17:05"
+      }
+    }
+  },
+  "special_procedures": {
+    "pre_auction": {
+      "description": "Order collection phase where market participants can submit orders without immediate execution",
+      "duration": "Typically 5-15 minutes before market opening"
+    },
+    "continuous_trading": {
+      "description": "Standard trading mode with real-time order matching and execution",
+      "order_types": ["Limit orders", "Market orders", "Stop orders"]
+    },
+    "closing_auction": {
+      "description": "Final price determination phase at market close",
+      "duration": "Typically 5-10 minutes"
+    },
+    "trading_at_last": {
+      "description": "Final trading period allowing execution only at the closing price",
+      "duration": "5 minutes (for derivatives)"
+    },
+    "after_hours_trading": {
+      "description": "Extended trading hours for specific instruments",
+      "availability": "Limited to certain derivatives and structured products"
+    }
+  },
+  "exchange_holidays": {
+    "2024": [
+      {"date": "1 January", "day": "Monday", "description": "New Year's Day"},
+      {"date": "29 March", "day": "Friday", "description": "Good Friday"},
+      {"date": "1 April", "day": "Monday", "description": "Easter Monday"},
+      {"date": "1 May", "day": "Wednesday", "description": "Labor Day"},
+      {"date": "3 May", "day": "Friday", "description": "Constitution Day"},
+      {"date": "30 May", "day": "Thursday", "description": "Corpus Christi"},
+      {"date": "15 August", "day": "Thursday", "description": "Assumption of Mary"},
+      {"date": "1 November", "day": "Friday", "description": "All Saints' Day"},
+      {"date": "11 November", "day": "Monday", "description": "Independence Day"},
+      {"date": "24 December", "day": "Tuesday", "description": "Christmas Eve"},
+      {"date": "25 December", "day": "Wednesday", "description": "Christmas Day"},
+      {"date": "26 December", "day": "Thursday", "description": "St. Stephen's Day"},
+      {"date": "31 December", "day": "Tuesday", "description": "New Year's Eve"}
+    ],
+    "2025": [
+      {"date": "1 January", "day": "Wednesday", "description": "New Year's Day"},
+      {"date": "6 January", "day": "Monday", "description": "Epiphany"},
+      {"date": "18 April", "day": "Friday", "description": "Good Friday"},
+      {"date": "21 April", "day": "Monday", "description": "Easter Monday"},
+      {"date": "1 May", "day": "Thursday", "description": "Labor Day"},
+      {"date": "19 June", "day": "Thursday", "description": "Corpus Christi"},
+      {"date": "15 August", "day": "Friday", "description": "Assumption of Mary"},
+      {"date": "11 November", "day": "Tuesday", "description": "Independence Day"},
+      {"date": "24 December", "day": "Wednesday", "description": "Christmas Eve"},
+      {"date": "25 December", "day": "Thursday", "description": "Christmas Day"},
+      {"date": "26 December", "day": "Friday", "description": "St. Stephen's Day"},
+      {"date": "31 December", "day": "Wednesday", "description": "New Year's Eve"}
+    ],
+    "2026": [
+      {"date": "1 January", "day": "Thursday", "description": "New Year's Day"},
+      {"date": "6 January", "day": "Tuesday", "description": "Epiphany"},
+      {"date": "3 April", "day": "Friday", "description": "Good Friday"},
+      {"date": "6 April", "day": "Monday", "description": "Easter Monday"},
+      {"date": "1 May", "day": "Friday", "description": "Labor Day"},
+      {"date": "4 June", "day": "Thursday", "description": "Corpus Christi"},
+      {"date": "11 November", "day": "Wednesday", "description": "Independence Day"},
+      {"date": "24 December", "day": "Thursday", "description": "Christmas Eve"},
+      {"date": "25 December", "day": "Friday", "description": "Christmas Day"},
+      {"date": "31 December", "day": "Thursday", "description": "New Year's Eve"}
+    ]
+  },
+  "market_segments_summary": {
+    "Main_Market_GPW": {
+      "indices": ["WIG20", "mWIG40", "sWIG80"],
+      "trading_hours": "09:00 - 16:50 (shares), 08:45 - 16:50 (derivatives)",
+      "special_features": ["RegS shares", "Continuous and auction trading modes"]
+    },
+    "NewConnect": {
+      "description": "Alternative market for smaller companies",
+      "trading_hours": "09:00 - 16:50",
+      "special_features": ["Single-price auction modes available"]
+    },
+    "Catalyst": {
+      "description": "Bond market",
+      "trading_hours": "09:00 - 16:50",
+      "currencies": ["PLN", "EUR"]
+    },
+    "GlobalConnect": {
+      "description": "Market for international companies",
+      "trading_hours": "09:05 - 17:05",
+      "special_features": ["Extended trading hours"]
+    }
+  },
+  "trading_modes": {
+    "Continuous_Trading": {
+      "description": "Standard order-driven trading with continuous order matching",
+      "availability": "All major market segments",
+      "order_types": ["Market", "Limit", "Stop", "Stop-Limit"]
+    },
+    "Single_Price_Auction": {
+      "description": "Call auction trading with single price determination",
+      "subtypes": ["Double Auction", "Single Auction (1 fix)"],
+      "availability": "GPW Main Market, NewConnect",
+      "usage": "Opening/closing procedures, specific securities"
+    }
+  },
+  "operational_notes": {
+    "pre_auction_period": "5 minutes before market open for continuous trading",
+    "post_auction_period": "5-15 minutes after market close for specific procedures",
+    "technical_breaks": "No scheduled technical breaks during regular trading hours",
+    "cross_trading": "Available between different market segments under specific conditions",
+    "after_hours": "Limited to certain derivatives and structured products"
+  },
+  "data_source": "Warsaw Stock Exchange (Giełda Papierów Wartościowych w Warszawie)",
+  "last_updated": "2025-11-06 21:20:00",
+  "disclaimer": "Trading hours may be subject to change during special market conditions or technical issues. Always verify current schedule with official GPW communications."
+}

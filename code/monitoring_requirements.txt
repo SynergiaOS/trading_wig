@@ -1,0 +1,49 @@
+# QuestDB-Pocketbase Monitoring System Requirements
+# ================================================
+#
+# Core dependencies for the monitoring system and dashboard
+#
+
+# Async HTTP client/server
+aiohttp>=3.8.0
+
+# System monitoring and utilities
+psutil>=5.9.0
+
+# Standard library modules (no installation needed):
+# - asyncio
+# - json
+# - logging
+# - sqlite3
+# - time
+# - datetime
+# - threading
+# - hashlib
+# - shutil
+# - smtplib
+# - ssl
+# - email
+# - subprocess
+# - signal
+# - pathlib
+# - urllib
+# - http.server
+# - webbrowser
+#
+# Optional dependencies for enhanced functionality:
+# - prometheus_client (for Prometheus integration)
+# - matplotlib (for advanced charting)
+# - pandas (for data analysis)
+# - numpy (for numerical computations)
+#
+# Uncomment if needed:
+# prometheus_client>=0.14.0
+# matplotlib>=3.5.0
+# pandas>=1.4.0
+# numpy>=1.21.0
+
+# Development dependencies (optional)
+# pytest>=7.0.0
+# pytest-asyncio>=0.21.0
+# black>=22.0.0
+# flake8>=5.0.0

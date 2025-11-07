@@ -1,0 +1,736 @@
+{
+  "index_name": "WIG80 (sWIG80)",
+  "current_index_value": "29,896.02",
+  "daily_change": "+59.05 (+0.20%)",
+  "extraction_date": "2025-11-06 20:53:58",
+  "total_companies": 80,
+  "companies": [
+    {
+      "company_name": "AGORA SA",
+      "ticker": "agora-sa",
+      "current_price": 9.36,
+      "high_price": 9.52,
+      "low_price": 9.20,
+      "change_percentage": -1.47,
+      "volume": 3900
+    },
+    {
+      "company_name": "Polimex-Mostostal",
+      "ticker": "polimex-mostostal",
+      "current_price": 6.27,
+      "high_price": 6.31,
+      "low_price": 6.12,
+      "change_percentage": 2.45,
+      "volume": 237120
+    },
+    {
+      "company_name": "Bioton SA",
+      "ticker": "bioton",
+      "current_price": 4.19,
+      "high_price": 4.26,
+      "low_price": 4.19,
+      "change_percentage": -1.64,
+      "volume": 6660
+    },
+    {
+      "company_name": "Echo Investment SA",
+      "ticker": "echo-investment-sa",
+      "current_price": 5.92,
+      "high_price": 6.00,
+      "low_price": 5.88,
+      "change_percentage": 0.68,
+      "volume": 91190
+    },
+    {
+      "company_name": "Asseco Business Solutions",
+      "ticker": "asseco-business-solutions",
+      "current_price": 87.00,
+      "high_price": 87.20,
+      "low_price": 87.00,
+      "change_percentage": -0.23,
+      "volume": 437
+    },
+    {
+      "company_name": "AC SA",
+      "ticker": "ac-spolka-akcyjna-aktie",
+      "current_price": 25.90,
+      "high_price": 26.00,
+      "low_price": 25.50,
+      "change_percentage": -0.38,
+      "volume": 80
+    },
+    {
+      "company_name": "Ambra SA",
+      "ticker": "ambra",
+      "current_price": 18.14,
+      "high_price": 18.60,
+      "low_price": 17.60,
+      "change_percentage": -2.58,
+      "volume": 27570
+    },
+    {
+      "company_name": "AMICA Wronki SA",
+      "ticker": "amica-wronki",
+      "current_price": 56.50,
+      "high_price": 57.10,
+      "low_price": 56.50,
+      "change_percentage": -1.05,
+      "volume": 416
+    },
+    {
+      "company_name": "Apator SA",
+      "ticker": "apator",
+      "current_price": 22.85,
+      "high_price": 23.10,
+      "low_price": 22.55,
+      "change_percentage": 0.66,
+      "volume": 3600
+    },
+    {
+      "company_name": "Astarta Holding NV",
+      "ticker": "astarta-holding",
+      "current_price": 45.30,
+      "high_price": 46.00,
+      "low_price": 45.10,
+      "change_percentage": 0.00,
+      "volume": 1540
+    },
+    {
+      "company_name": "Arctic Paper SA",
+      "ticker": "arctic-paper",
+      "current_price": 8.38,
+      "high_price": 8.44,
+      "low_price": 8.30,
+      "change_percentage": 1.58,
+      "volume": 49110
+    },
+    {
+      "company_name": "Bumech SA",
+      "ticker": "bumech",
+      "current_price": 30.65,
+      "high_price": 30.80,
+      "low_price": 27.80,
+      "change_percentage": 10.25,
+      "volume": 123140
+    },
+    {
+      "company_name": "Boryszew SA",
+      "ticker": "boryszew",
+      "current_price": 5.98,
+      "high_price": 6.04,
+      "low_price": 5.96,
+      "change_percentage": -0.99,
+      "volume": 57480
+    },
+    {
+      "company_name": "Bank Ochrony Środowiska",
+      "ticker": "bank-ochrony-srodowiska",
+      "current_price": 12.24,
+      "high_price": 12.28,
+      "low_price": 11.80,
+      "change_percentage": 3.03,
+      "volume": 18760
+    },
+    {
+      "company_name": "CI Games",
+      "ticker": "cigames",
+      "current_price": 2.86,
+      "high_price": 2.89,
+      "low_price": 2.845,
+      "change_percentage": 0.35,
+      "volume": 75200
+    },
+    {
+      "company_name": "Comp SA",
+      "ticker": "comp",
+      "current_price": 57.80,
+      "high_price": 58.00,
+      "low_price": 57.40,
+      "change_percentage": -0.34,
+      "volume": 423
+    },
+    {
+      "company_name": "Cognor SA",
+      "ticker": "cognor",
+      "current_price": 6.685,
+      "high_price": 6.72,
+      "low_price": 6.56,
+      "change_percentage": 0.38,
+      "volume": 54450
+    },
+    {
+      "company_name": "Decora SA",
+      "ticker": "decora",
+      "current_price": 68.60,
+      "high_price": 68.80,
+      "low_price": 68.40,
+      "change_percentage": -0.58,
+      "volume": 815
+    },
+    {
+      "company_name": "Elektrotim SA",
+      "ticker": "elektrotim",
+      "current_price": 47.90,
+      "high_price": 48.00,
+      "low_price": 46.30,
+      "change_percentage": 1.91,
+      "volume": 29520
+    },
+    {
+      "company_name": "Erbud SA",
+      "ticker": "erbud",
+      "current_price": 28.75,
+      "high_price": 29.35,
+      "low_price": 28.40,
+      "change_percentage": -0.69,
+      "volume": 2050
+    },
+    {
+      "company_name": "Grenevia",
+      "ticker": "famur",
+      "current_price": 3.04,
+      "high_price": 3.09,
+      "low_price": 3.03,
+      "change_percentage": -0.65,
+      "volume": 16940
+    },
+    {
+      "company_name": "Ferro SA",
+      "ticker": "ferro",
+      "current_price": 31.40,
+      "high_price": 31.70,
+      "low_price": 31.30,
+      "change_percentage": 0.00,
+      "volume": 3360
+    },
+    {
+      "company_name": "Grupa Forte",
+      "ticker": "fabryki-mebli-forte",
+      "current_price": 25.70,
+      "high_price": 25.80,
+      "low_price": 25.50,
+      "change_percentage": 0.00,
+      "volume": 1250
+    },
+    {
+      "company_name": "Kogeneracja SA",
+      "ticker": "kogeneracja-sa",
+      "current_price": 64.70,
+      "high_price": 64.70,
+      "low_price": 63.80,
+      "change_percentage": 1.09,
+      "volume": 2200
+    },
+    {
+      "company_name": "Lubelski Wegiel Bogdanka",
+      "ticker": "lubelski-wegiel-bogdanka",
+      "current_price": 21.35,
+      "high_price": 21.50,
+      "low_price": 21.25,
+      "change_percentage": 0.47,
+      "volume": 9220
+    },
+    {
+      "company_name": "MCI Management SA",
+      "ticker": "mci-management",
+      "current_price": 30.00,
+      "high_price": 30.10,
+      "low_price": 29.80,
+      "change_percentage": 0.67,
+      "volume": 429
+    },
+    {
+      "company_name": "Mercor SA",
+      "ticker": "mercor",
+      "current_price": 22.90,
+      "high_price": 23.00,
+      "low_price": 22.60,
+      "change_percentage": 0.00,
+      "volume": 3120
+    },
+    {
+      "company_name": "Mennica Polska SA",
+      "ticker": "mennica-polska",
+      "current_price": 35.10,
+      "high_price": 35.50,
+      "low_price": 34.50,
+      "change_percentage": 0.86,
+      "volume": 1180
+    },
+    {
+      "company_name": "Mostostal Zabrze",
+      "ticker": "mostostal-zabrze-holding",
+      "current_price": 6.69,
+      "high_price": 6.78,
+      "low_price": 6.65,
+      "change_percentage": -1.33,
+      "volume": 5950
+    },
+    {
+      "company_name": "Quercus TFI SA",
+      "ticker": "quercus-tfi",
+      "current_price": 13.15,
+      "high_price": 13.15,
+      "low_price": 12.80,
+      "change_percentage": 1.15,
+      "volume": 3310
+    },
+    {
+      "company_name": "Rank Progress SA",
+      "ticker": "rank-progress",
+      "current_price": 4.04,
+      "high_price": 4.04,
+      "low_price": 4.005,
+      "change_percentage": 0.00,
+      "volume": 0
+    },
+    {
+      "company_name": "Selena FM SA",
+      "ticker": "selena-fm",
+      "current_price": 38.70,
+      "high_price": 39.50,
+      "low_price": 38.50,
+      "change_percentage": -2.03,
+      "volume": 290
+    },
+    {
+      "company_name": "Sygnity SA",
+      "ticker": "sygnity",
+      "current_price": 100.50,
+      "high_price": 101.50,
+      "low_price": 99.00,
+      "change_percentage": 0.50,
+      "volume": 879
+    },
+    {
+      "company_name": "ŚNIEŻKA SA",
+      "ticker": "fabryka-farb-i-lakierow-sniezka",
+      "current_price": 78.80,
+      "high_price": 79.40,
+      "low_price": 78.60,
+      "change_percentage": 0.25,
+      "volume": 18
+    },
+    {
+      "company_name": "Stomil Sanok SA",
+      "ticker": "stomil-sanok-sa",
+      "current_price": 21.10,
+      "high_price": 21.10,
+      "low_price": 21.10,
+      "change_percentage": 0.00,
+      "volume": 344
+    },
+    {
+      "company_name": "Stalprodukt SA",
+      "ticker": "stalprodukt",
+      "current_price": 264.00,
+      "high_price": 264.00,
+      "low_price": 260.00,
+      "change_percentage": 0.00,
+      "volume": 791
+    },
+    {
+      "company_name": "Stalexport Autostrady",
+      "ticker": "stalexport-autostrady",
+      "current_price": 3.06,
+      "high_price": 3.09,
+      "low_price": 3.02,
+      "change_percentage": 0.66,
+      "volume": 303610
+    },
+    {
+      "company_name": "Toya SA",
+      "ticker": "toya",
+      "current_price": 11.20,
+      "high_price": 11.50,
+      "low_price": 10.94,
+      "change_percentage": -1.75,
+      "volume": 51510
+    },
+    {
+      "company_name": "Unibep SA",
+      "ticker": "unibep",
+      "current_price": 12.45,
+      "high_price": 12.60,
+      "low_price": 12.30,
+      "change_percentage": -0.80,
+      "volume": 6680
+    },
+    {
+      "company_name": "Votum SA",
+      "ticker": "votum",
+      "current_price": 46.05,
+      "high_price": 46.10,
+      "low_price": 45.45,
+      "change_percentage": 1.32,
+      "volume": 3140
+    },
+    {
+      "company_name": "VRG",
+      "ticker": "vistula-group",
+      "current_price": 4.43,
+      "high_price": 4.50,
+      "low_price": 4.43,
+      "change_percentage": -1.77,
+      "volume": 1870
+    },
+    {
+      "company_name": "Wielton SA",
+      "ticker": "wielton",
+      "current_price": 6.85,
+      "high_price": 7.00,
+      "low_price": 6.73,
+      "change_percentage": -2.56,
+      "volume": 80930
+    },
+    {
+      "company_name": "WAWEL SA",
+      "ticker": "wawel",
+      "current_price": 700.00,
+      "high_price": 700.00,
+      "low_price": 666.00,
+      "change_percentage": 0.00,
+      "volume": 146
+    },
+    {
+      "company_name": "Zespol Elektrowni Patnow Adamow Konin",
+      "ticker": "patnow-adamow-konin",
+      "current_price": 21.95,
+      "high_price": 21.95,
+      "low_price": 21.60,
+      "change_percentage": 0.46,
+      "volume": 6060
+    },
+    {
+      "company_name": "Oponeo.pl SA",
+      "ticker": "oponeo.pl",
+      "current_price": 96.80,
+      "high_price": 97.00,
+      "low_price": 94.80,
+      "change_percentage": 0.83,
+      "volume": 2930
+    },
+    {
+      "company_name": "Mabion",
+      "ticker": "mabion",
+      "current_price": 7.94,
+      "high_price": 8.06,
+      "low_price": 7.90,
+      "change_percentage": -1.37,
+      "volume": 21780
+    },
+    {
+      "company_name": "Tarczynski",
+      "ticker": "tarczynski",
+      "current_price": 126.50,
+      "high_price": 126.50,
+      "low_price": 126.50,
+      "change_percentage": 0.40,
+      "volume": 20
+    },
+    {
+      "company_name": "Bloober",
+      "ticker": "bloober",
+      "current_price": 25.60,
+      "high_price": 25.75,
+      "low_price": 25.35,
+      "change_percentage": -0.39,
+      "volume": 4880
+    },
+    {
+      "company_name": "Synthaverse",
+      "ticker": "biomedlub",
+      "current_price": 4.155,
+      "high_price": 4.22,
+      "low_price": 4.11,
+      "change_percentage": -0.36,
+      "volume": 55860
+    },
+    {
+      "company_name": "Medicalg",
+      "ticker": "medicalg",
+      "current_price": 31.80,
+      "high_price": 32.40,
+      "low_price": 30.45,
+      "change_percentage": 2.25,
+      "volume": 84680
+    },
+    {
+      "company_name": "Datawalk",
+      "ticker": "pilab",
+      "current_price": 90.00,
+      "high_price": 91.39,
+      "low_price": 87.00,
+      "change_percentage": 2.13,
+      "volume": 5020
+    },
+    {
+      "company_name": "Ryvu",
+      "ticker": "selvita",
+      "current_price": 24.10,
+      "high_price": 24.60,
+      "low_price": 23.70,
+      "change_percentage": -0.82,
+      "volume": 21830
+    },
+    {
+      "company_name": "Ailleron",
+      "ticker": "windmobil",
+      "current_price": 15.38,
+      "high_price": 15.38,
+      "low_price": 15.20,
+      "change_percentage": 0.13,
+      "volume": 7470
+    },
+    {
+      "company_name": "Mercator WA",
+      "ticker": "mercator-wa",
+      "current_price": 40.05,
+      "high_price": 40.50,
+      "low_price": 40.00,
+      "change_percentage": 0.13,
+      "volume": 1160
+    },
+    {
+      "company_name": "Torpol",
+      "ticker": "torpol",
+      "current_price": 52.40,
+      "high_price": 52.80,
+      "low_price": 52.00,
+      "change_percentage": 0.38,
+      "volume": 1860
+    },
+    {
+      "company_name": "Columbus",
+      "ticker": "columbus",
+      "current_price": 6.70,
+      "high_price": 6.90,
+      "low_price": 6.55,
+      "change_percentage": -0.89,
+      "volume": 44260
+    },
+    {
+      "company_name": "PCC Rokita",
+      "ticker": "pccrokita",
+      "current_price": 69.20,
+      "high_price": 69.30,
+      "low_price": 69.00,
+      "change_percentage": 0.29,
+      "volume": 603
+    },
+    {
+      "company_name": "Unimot",
+      "ticker": "unimot",
+      "current_price": 127.80,
+      "high_price": 128.60,
+      "low_price": 126.40,
+      "change_percentage": 0.79,
+      "volume": 1660
+    },
+    {
+      "company_name": "Vigo System",
+      "ticker": "vigosys",
+      "current_price": 512.00,
+      "high_price": 518.00,
+      "low_price": 508.00,
+      "change_percentage": -1.16,
+      "volume": 176
+    },
+    {
+      "company_name": "Atal SA",
+      "ticker": "atal-sa",
+      "current_price": 58.80,
+      "high_price": 59.00,
+      "low_price": 58.40,
+      "change_percentage": 0.00,
+      "volume": 720
+    },
+    {
+      "company_name": "Poznanska Korporacja Budowlana Peka",
+      "ticker": "poznanska-korporacja-budowlana-peka",
+      "current_price": 15.00,
+      "high_price": 15.10,
+      "low_price": 15.00,
+      "change_percentage": 0.00,
+      "volume": 841
+    },
+    {
+      "company_name": "Wittchen SA",
+      "ticker": "wittchen-sa",
+      "current_price": 17.00,
+      "high_price": 17.24,
+      "low_price": 16.90,
+      "change_percentage": 1.80,
+      "volume": 45570
+    },
+    {
+      "company_name": "Enter Air",
+      "ticker": "enter-air-sa",
+      "current_price": 52.90,
+      "high_price": 53.00,
+      "low_price": 52.80,
+      "change_percentage": 0.00,
+      "volume": 1400
+    },
+    {
+      "company_name": "Archicom SA",
+      "ticker": "archicom-sa",
+      "current_price": 47.30,
+      "high_price": 48.00,
+      "low_price": 47.20,
+      "change_percentage": 0.21,
+      "volume": 116
+    },
+    {
+      "company_name": "GreenX Metals",
+      "ticker": "prairie-downs-metals-ltd",
+      "current_price": 1.958,
+      "high_price": 1.98,
+      "low_price": 1.932,
+      "change_percentage": -0.10,
+      "volume": 87600
+    },
+    {
+      "company_name": "Playway",
+      "ticker": "playway-sa",
+      "current_price": 263.50,
+      "high_price": 268.00,
+      "low_price": 263.00,
+      "change_percentage": -0.57,
+      "volume": 2940
+    },
+    {
+      "company_name": "Celon Pharma",
+      "ticker": "celon-pharma-sa",
+      "current_price": 21.70,
+      "high_price": 21.70,
+      "low_price": 21.40,
+      "change_percentage": 1.64,
+      "volume": 2520
+    },
+    {
+      "company_name": "Scope Fluidics",
+      "ticker": "scope-fluidics",
+      "current_price": 152.00,
+      "high_price": 153.60,
+      "low_price": 152.00,
+      "change_percentage": -1.04,
+      "volume": 748
+    },
+    {
+      "company_name": "XTPL",
+      "ticker": "xtpl",
+      "current_price": 71.00,
+      "high_price": 72.60,
+      "low_price": 71.00,
+      "change_percentage": -0.70,
+      "volume": 511
+    },
+    {
+      "company_name": "Molecure",
+      "ticker": "oncoarendi-therapeutics-sa",
+      "current_price": 6.18,
+      "high_price": 6.24,
+      "low_price": 6.08,
+      "change_percentage": -0.32,
+      "volume": 15680
+    },
+    {
+      "company_name": "ML System",
+      "ticker": "ml-system",
+      "current_price": 17.04,
+      "high_price": 17.20,
+      "low_price": 16.68,
+      "change_percentage": 2.04,
+      "volume": 23320
+    },
+    {
+      "company_name": "Creepy Jar",
+      "ticker": "creepy-jar",
+      "current_price": 429.00,
+      "high_price": 432.00,
+      "low_price": 423.00,
+      "change_percentage": 1.66,
+      "volume": 274
+    },
+    {
+      "company_name": "Selvita",
+      "ticker": "selvita-sa",
+      "current_price": 40.60,
+      "high_price": 41.00,
+      "low_price": 39.80,
+      "change_percentage": 0.25,
+      "volume": 22660
+    },
+    {
+      "company_name": "Dadelo",
+      "ticker": "dadelo",
+      "current_price": 57.60,
+      "high_price": 59.20,
+      "low_price": 56.80,
+      "change_percentage": -0.69,
+      "volume": 3090
+    },
+    {
+      "company_name": "Captor Therapeutics",
+      "ticker": "captor-therapeutics",
+      "current_price": 47.10,
+      "high_price": 47.80,
+      "low_price": 46.50,
+      "change_percentage": 0.21,
+      "volume": 1870
+    },
+    {
+      "company_name": "Shoper",
+      "ticker": "shoper",
+      "current_price": 54.20,
+      "high_price": 55.80,
+      "low_price": 53.20,
+      "change_percentage": -1.45,
+      "volume": 3900
+    },
+    {
+      "company_name": "Onde",
+      "ticker": "onde",
+      "current_price": 8.69,
+      "high_price": 8.69,
+      "low_price": 8.32,
+      "change_percentage": 4.32,
+      "volume": 22040
+    },
+    {
+      "company_name": "Creotech Instruments",
+      "ticker": "creotech-instruments",
+      "current_price": 385.00,
+      "high_price": 387.00,
+      "low_price": 382.50,
+      "change_percentage": -0.26,
+      "volume": 695
+    },
+    {
+      "company_name": "Bioceltix",
+      "ticker": "bioceltix",
+      "current_price": 96.90,
+      "high_price": 97.00,
+      "low_price": 96.10,
+      "change_percentage": 0.41,
+      "volume": 973
+    },
+    {
+      "company_name": "Murapol",
+      "ticker": "murapol",
+      "current_price": 38.55,
+      "high_price": 38.65,
+      "low_price": 37.35,
+      "change_percentage": 3.21,
+      "volume": 14910
+    }
+  ],
+  "notes": {
+    "data_source": "Investing.com",
+    "data_limitations": "Market capitalization and sector information not available in the source table",
+    "extraction_method": "Automated web scraping",
+    "price_currency": "PLN (Polish Zloty)",
+    "last_update": "Real-time data as of 2025-11-06 20:53:58"
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "color": {
+    "background": {
+      "pure-black": {
+        "value": "#000000",
+        "type": "color",
+        "description": "OLED optimized, navigation bar, hero sections"
+      },
+      "near-black": {
+        "value": "#0A0E27",
+        "type": "color",
+        "description": "Main page background with subtle blue tint"
+      },
+      "surface-dark": {
+        "value": "#141824",
+        "type": "color",
+        "description": "Elevated cards, table rows, modals (Level 1)"
+      },
+      "surface-hover": {
+        "value": "#1E2433",
+        "type": "color",
+        "description": "Hover states, active elements (Level 2)"
+      },
+      "surface-modal": {
+        "value": "#282E3F",
+        "type": "color",
+        "description": "Tooltips, highest elevation (Level 3)"
+      }
+    },
+    "text": {
+      "primary": {
+        "value": "#E4E4E7",
+        "type": "color",
+        "description": "Prices, company names, primary data (WCAG AAA 15.2:1)"
+      },
+      "secondary": {
+        "value": "#A1A1AA",
+        "type": "color",
+        "description": "Labels, secondary metrics, timestamps (WCAG AAA 8.9:1)"
+      },
+      "tertiary": {
+        "value": "#71717A",
+        "type": "color",
+        "description": "Captions, footnotes, disabled states (WCAG AA 5.2:1)"
+      },
+      "inverse": {
+        "value": "#0A0A0A",
+        "type": "color",
+        "description": "Text on accent backgrounds"
+      }
+    },
+    "accent": {
+      "primary": {
+        "value": "#3B82F6",
+        "type": "color",
+        "description": "Primary CTAs, links, interactive icons (WCAG AAA 8.6:1)"
+      },
+      "success": {
+        "value": "#10B981",
+        "type": "color",
+        "description": "Positive price changes, gains, buy signals (WCAG AAA 9.1:1)"
+      },
+      "danger": {
+        "value": "#EF4444",
+        "type": "color",
+        "description": "Negative price changes, losses, sell signals (WCAG AAA 8.2:1)"
+      },
+      "warning": {
+        "value": "#F59E0B",
+        "type": "color",
+        "description": "Alerts, pending actions, caution indicators (WCAG AAA 10.4:1)"
+      },
+      "info": {
+        "value": "#06B6D4",
+        "type": "color",
+        "description": "Neutral information, chart annotations (WCAG AAA 8.8:1)"
+      }
+    },
+    "chart": {
+      "gain": {
+        "value": "#10B981",
+        "type": "color",
+        "description": "Positive performance areas, uptrend lines"
+      },
+      "loss": {
+        "value": "#EF4444",
+        "type": "color",
+        "description": "Negative performance areas, downtrend lines"
+      },
+      "grid": {
+        "value": "rgba(255, 255, 255, 0.05)",
+        "type": "color",
+        "description": "Background grid lines"
+      },
+      "axis": {
+        "value": "rgba(255, 255, 255, 0.2)",
+        "type": "color",
+        "description": "Axis lines and labels"
+      }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "display": {
+        "value": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        "type": "fontFamily",
+        "description": "Headlines, navigation, UI labels"
+      },
+      "body": {
+        "value": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        "type": "fontFamily",
+        "description": "Body text, descriptions"
+      },
+      "mono": {
+        "value": "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
+        "type": "fontFamily",
+        "description": "Prices, numbers, stock symbols, metrics"
+      }
+    },
+    "fontSize": {
+      "hero": { "value": "48px", "type": "dimension" },
+      "h1": { "value": "36px", "type": "dimension" },
+      "h2": { "value": "24px", "type": "dimension" },
+      "h3": { "value": "20px", "type": "dimension" },
+      "body-lg": { "value": "18px", "type": "dimension" },
+      "body": { "value": "16px", "type": "dimension" },
+      "small": { "value": "14px", "type": "dimension" },
+      "price": { "value": "32px", "type": "dimension" },
+      "metric": { "value": "20px", "type": "dimension" }
+    },
+    "fontWeight": {
+      "regular": { "value": "400", "type": "number" },
+      "medium": { "value": "500", "type": "number" },
+      "semibold": { "value": "600", "type": "number" },
+      "bold": { "value": "700", "type": "number" }
+    },
+    "lineHeight": {
+      "tight": { "value": "1.1", "type": "number" },
+      "snug": { "value": "1.2", "type": "number" },
+      "normal": { "value": "1.3", "type": "number" },
+      "relaxed": { "value": "1.5", "type": "number" },
+      "loose": { "value": "1.6", "type": "number" }
+    },
+    "letterSpacing": {
+      "tight": { "value": "-0.02em", "type": "dimension" },
+      "snug": { "value": "-0.01em", "type": "dimension" },
+      "normal": { "value": "0", "type": "dimension" },
+      "wide": { "value": "0.01em", "type": "dimension" }
+    }
+  },
+  "spacing": {
+    "xs": { "value": "4px", "type": "dimension", "description": "Icon padding, tight inline spacing" },
+    "sm": { "value": "8px", "type": "dimension", "description": "Button padding vertical, inline gaps" },
+    "md": { "value": "16px", "type": "dimension", "description": "Element gaps, card internal spacing" },
+    "lg": { "value": "24px", "type": "dimension", "description": "Card padding compact, table cell padding" },
+    "xl": { "value": "32px", "type": "dimension", "description": "Card padding standard, section margins" },
+    "2xl": { "value": "48px", "type": "dimension", "description": "Large section spacing, hero padding" },
+    "3xl": { "value": "64px", "type": "dimension", "description": "Major section gaps, page margins" },
+    "4xl": { "value": "96px", "type": "dimension", "description": "Hero sections, visual breathing room" }
+  },
+  "borderRadius": {
+    "sm": { "value": "8px", "type": "dimension", "description": "Buttons, small badges, tags" },
+    "md": { "value": "12px", "type": "dimension", "description": "Cards, inputs, dropdowns" },
+    "lg": { "value": "16px", "type": "dimension", "description": "Modals, large panels" },
+    "full": { "value": "9999px", "type": "dimension", "description": "Pills, rounded buttons, status indicators" }
+  },
+  "boxShadow": {
+    "card": {
+      "value": "0 0 0 1px rgba(255, 255, 255, 0.06), 0 4px 12px rgba(0, 0, 0, 0.5)",
+      "type": "shadow",
+      "description": "Default card elevation"
+    },
+    "card-hover": {
+      "value": "0 0 0 1px rgba(255, 255, 255, 0.12), 0 8px 24px rgba(0, 0, 0, 0.6)",
+      "type": "shadow",
+      "description": "Card hover state"
+    },
+    "modal": {
+      "value": "0 0 0 1px rgba(255, 255, 255, 0.1), 0 12px 48px rgba(0, 0, 0, 0.8)",
+      "type": "shadow",
+      "description": "Modal and dropdown elevation"
+    },
+    "glow-primary": {
+      "value": "0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3)",
+      "type": "shadow",
+      "description": "Primary button hover glow"
+    },
+    "glow-success": {
+      "value": "0 0 16px rgba(16, 185, 129, 0.4)",
+      "type": "shadow",
+      "description": "Positive value flash"
+    },
+    "glow-danger": {
+      "value": "0 0 16px rgba(239, 68, 68, 0.4)",
+      "type": "shadow",
+      "description": "Negative value flash"
+    }
+  },
+  "animation": {
+    "duration": {
+      "fast": { "value": "150ms", "type": "duration", "description": "Button hover, icon changes" },
+      "normal": { "value": "250ms", "type": "duration", "description": "Card elevation, transitions" },
+      "slow": { "value": "400ms", "type": "duration", "description": "Modals, panels" },
+      "ticker": { "value": "30s", "type": "duration", "description": "Scrolling ticker animation" }
+    },
+    "easing": {
+      "default": { "value": "ease-out", "type": "cubicBezier", "description": "Standard transitions" },
+      "sharp": { "value": "cubic-bezier(0.4, 0.0, 0.2, 1)", "type": "cubicBezier", "description": "Snappy interactions" }
+    }
+  },
+  "border": {
+    "subtle": {
+      "value": "1px solid rgba(255, 255, 255, 0.06)",
+      "type": "border",
+      "description": "Card borders, table cell dividers"
+    },
+    "moderate": {
+      "value": "1px solid rgba(255, 255, 255, 0.12)",
+      "type": "border",
+      "description": "Active borders, section separators"
+    },
+    "strong": {
+      "value": "1px solid rgba(255, 255, 255, 0.2)",
+      "type": "border",
+      "description": "Focus states, emphasized boundaries"
+    },
+    "accent": {
+      "value": "2px solid #3B82F6",
+      "type": "border",
+      "description": "Selected items, active filters"
+    }
+  }
+}

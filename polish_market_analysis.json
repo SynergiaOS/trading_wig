@@ -1,0 +1,106 @@
+{
+  "market_statistics": {
+    "total_companies": 80,
+    "gainers": 38,
+    "losers": 31,
+    "unchanged": 11,
+    "market_sentiment": "bullish",
+    "average_sentiment_score": 19.78
+  },
+  "top_performers": {
+    "gainers": [
+      {
+        "symbol": "bumech",
+        "company_name": "Bumech SA",
+        "change_percent": 10.25
+      },
+      {
+        "symbol": "onde",
+        "company_name": "Onde",
+        "change_percent": 4.32
+      },
+      {
+        "symbol": "murapol",
+        "company_name": "Murapol",
+        "change_percent": 3.21
+      },
+      {
+        "symbol": "bank-ochrony-srodowiska",
+        "company_name": "Bank Ochrony Środowiska",
+        "change_percent": 3.03
+      },
+      {
+        "symbol": "polimex-mostostal",
+        "company_name": "Polimex-Mostostal",
+        "change_percent": 2.45
+      }
+    ],
+    "losers": [
+      {
+        "symbol": "ambra",
+        "company_name": "Ambra SA",
+        "change_percent": -2.58
+      },
+      {
+        "symbol": "wielton",
+        "company_name": "Wielton SA",
+        "change_percent": -2.56
+      },
+      {
+        "symbol": "selena-fm",
+        "company_name": "Selena FM SA",
+        "change_percent": -2.03
+      },
+      {
+        "symbol": "vistula-group",
+        "company_name": "VRG",
+        "change_percent": -1.77
+      },
+      {
+        "symbol": "toya",
+        "company_name": "Toya SA",
+        "change_percent": -1.75
+      }
+    ]
+  },
+  "liquidity_analysis": {
+    "high_volume_stocks": 28,
+    "low_volume_stocks": 23,
+    "high_volume_examples": [
+      {
+        "symbol": "polimex-mostostal",
+        "company_name": "Polimex-Mostostal",
+        "volume_score": 0.9187500000000001
+      },
+      {
+        "symbol": "echo-investment-sa",
+        "company_name": "Echo Investment SA",
+        "volume_score": 0.91625
+      },
+      {
+        "symbol": "ambra",
+        "company_name": "Ambra SA",
+        "volume_score": 0.9
+      }
+    ]
+  },
+  "valuation_analysis": {
+    "overvalued_companies": 0,
+    "overvaluation_rate": 0.0,
+    "high_risk_companies": []
+  },
+  "correlation_insights": {
+    "total_correlations_analyzed": 190,
+    "strong_correlations": 0,
+    "correlation_examples": []
+  },
+  "risk_assessment": {
+    "high_volatility_stocks": 1,
+    "low_liquidity_risk": 23,
+    "overall_market_risk": "low"
+  },
+  "ai_insights": [
+    "Mixed sentiment suggests tactical trading approach"
+  ],
+  "generated_at": "2025-11-06T21:35:59.680322"
+}
