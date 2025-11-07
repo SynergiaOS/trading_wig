@@ -1,5 +1,5 @@
 # Dockerfile for Frontend Service
-FROM node:18-alpine AS frontend-builder
+FROM node:18-alpine
 
 # Install pnpm
 RUN npm install -g pnpm@latest
@@ -19,11 +19,9 @@ COPY polish-finance-platform/polish-finance-app/ ./polish-finance-platform/polis
 # Build frontend
 RUN pnpm run build:prod
 
-# Use nginx to serve static files
-FROM nginx:alpine
-COPY --from=frontend-builder /app/polish-finance-platform/polish-finance-app/dist /usr/share/nginx/html
-COPY polish-finance-platform/polish-finance-app/nginx.conf /etc/nginx/conf.d/default.conf 2>/dev/null || echo "No nginx.conf found"
+# Expose port (Railway will set PORT env var, default 4173)
+EXPOSE 4173
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Start Vite preview server (serves built files)
+CMD ["sh", "-c", "cd /app/polish-finance-platform/polish-finance-app && PORT=${PORT:-4173} pnpm exec vite preview --host 0.0.0.0 --port ${PORT:-4173}"]
 
