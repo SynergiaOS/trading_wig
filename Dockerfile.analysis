@@ -24,5 +24,8 @@ EXPOSE 8001
 # Set Python path
 ENV PYTHONPATH=/app
 
-# Run the server
-CMD ["uvicorn", "analysis.app.main:app", "--host", "0.0.0.0", "--port", "8001"]
+# Default port if PORT not set
+ENV PORT=8001
+
+# Run the server (use shell form to read PORT from environment)
+CMD uvicorn analysis.app.main:app --host 0.0.0.0 --port ${PORT:-8001}

@@ -155,3 +155,7 @@ memories/
 .augment/rules/byterover-rules.md
 # Snyk Security Extension - AI Rules (auto-generated)
 .cursor/rules/snyk_rules.mdc
+
+# Security scanner cache files
+.cache_ggshield
+*.cache_ggshield

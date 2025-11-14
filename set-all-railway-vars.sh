@@ -60,11 +60,31 @@ ANALYSIS_URL=""
 # Spróbuj pobrać URL-e z Railway
 if railway service backend &>/dev/null 2>&1; then
     echo -e "${BLUE}   Szukam Backend URL...${NC}"
-    # Spróbuj różne metody
-    BACKEND_DOMAIN=$(railway status --service backend 2>/dev/null | grep -iE "domain|url|https://" | head -1 | grep -oE 'https://[^ ]+' || echo "")
+    # Przełącz na backend service
+    railway service backend &>/dev/null
+    
+    # Metoda 1: railway domain (bez --service, bo już jesteśmy na serwisie)
+    BACKEND_DOMAIN=$(railway domain 2>&1 | grep -oE 'https://[^ ]+' | head -1 || echo "")
+    
+    # Metoda 2: RAILWAY_PUBLIC_DOMAIN z variables
     if [ -z "$BACKEND_DOMAIN" ]; then
-        BACKEND_DOMAIN=$(railway variables --json --service backend 2>/dev/null | grep -oE '"RAILWAY_PUBLIC_DOMAIN":"[^"]*"' | cut -d'"' -f4 || echo "")
+        BACKEND_DOMAIN=$(railway variables --json 2>/dev/null | grep -oE '"RAILWAY_PUBLIC_DOMAIN":"[^"]*"' | cut -d'"' -f4 || echo "")
     fi
+    
+    # Metoda 3: RAILWAY_SERVICE_BACKEND_URL z variables (może być w innym serwisie)
+    if [ -z "$BACKEND_DOMAIN" ]; then
+        # Sprawdź w każdym serwisie
+        for svc in frontend backend analysis; do
+            if railway service "$svc" &>/dev/null 2>&1; then
+                TEMP_DOMAIN=$(railway variables --json 2>/dev/null | grep -oE '"RAILWAY_SERVICE_BACKEND_URL":"[^"]*"' | cut -d'"' -f4 || echo "")
+                if [ -n "$TEMP_DOMAIN" ]; then
+                    BACKEND_DOMAIN="$TEMP_DOMAIN"
+                    break
+                fi
+            fi
+        done
+    fi
+    
     if [ -n "$BACKEND_DOMAIN" ]; then
         if [[ ! "$BACKEND_DOMAIN" =~ ^https:// ]]; then
             BACKEND_URL="https://$BACKEND_DOMAIN"
@@ -79,10 +99,31 @@ fi
 
 if railway service analysis &>/dev/null 2>&1; then
     echo -e "${BLUE}   Szukam Analysis URL...${NC}"
-    ANALYSIS_DOMAIN=$(railway status --service analysis 2>/dev/null | grep -iE "domain|url|https://" | head -1 | grep -oE 'https://[^ ]+' || echo "")
+    # Przełącz na analysis service
+    railway service analysis &>/dev/null
+    
+    # Metoda 1: railway domain (bez --service, bo już jesteśmy na serwisie)
+    ANALYSIS_DOMAIN=$(railway domain 2>&1 | grep -oE 'https://[^ ]+' | head -1 || echo "")
+    
+    # Metoda 2: RAILWAY_PUBLIC_DOMAIN z variables
     if [ -z "$ANALYSIS_DOMAIN" ]; then
-        ANALYSIS_DOMAIN=$(railway variables --json --service analysis 2>/dev/null | grep -oE '"RAILWAY_PUBLIC_DOMAIN":"[^"]*"' | cut -d'"' -f4 || echo "")
+        ANALYSIS_DOMAIN=$(railway variables --json 2>/dev/null | grep -oE '"RAILWAY_PUBLIC_DOMAIN":"[^"]*"' | cut -d'"' -f4 || echo "")
     fi
+    
+    # Metoda 3: RAILWAY_SERVICE_ANALYSIS_URL z variables (może być w innym serwisie)
+    if [ -z "$ANALYSIS_DOMAIN" ]; then
+        # Sprawdź w każdym serwisie
+        for svc in frontend backend analysis; do
+            if railway service "$svc" &>/dev/null 2>&1; then
+                TEMP_DOMAIN=$(railway variables --json 2>/dev/null | grep -oE '"RAILWAY_SERVICE_ANALYSIS_URL":"[^"]*"' | cut -d'"' -f4 || echo "")
+                if [ -n "$TEMP_DOMAIN" ]; then
+                    ANALYSIS_DOMAIN="$TEMP_DOMAIN"
+                    break
+                fi
+            fi
+        done
+    fi
+    
     if [ -n "$ANALYSIS_DOMAIN" ]; then
         if [[ ! "$ANALYSIS_DOMAIN" =~ ^https:// ]]; then
             ANALYSIS_URL="https://$ANALYSIS_DOMAIN"

@@ -23,5 +23,8 @@ EXPOSE 8000
 # Set Python path
 ENV PYTHONPATH=/app
 
-# Run the server
-CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Default port if PORT not set
+ENV PORT=8000
+
+# Run the server (use shell form to read PORT from environment)
+CMD uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT:-8000}
