@@ -1,20 +1,27 @@
-# Dockerfile for Backend API Service (Realtime Data)
+# Dockerfile for Backend API Service (FastAPI)
 FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install dependencies (use --break-system-packages for Docker containers)
-COPY code/requirements.txt ./code/
-RUN pip install --no-cache-dir --break-system-packages -r code/requirements.txt
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY backend/requirements.txt ./backend/
+RUN pip install --no-cache-dir --break-system-packages -r backend/requirements.txt
 
 # Copy application code
-COPY code/realtime_api_server.py ./code/
+COPY backend/app ./backend/app
 COPY data/ ./data/
 COPY polish-finance-platform/polish-finance-app/public/wig80_current_data.json* ./polish-finance-platform/polish-finance-app/public/ 2>/dev/null || true
 
 # Expose port (Railway will set PORT env var)
 EXPOSE 8000
 
-# Run the server
-CMD ["python3", "code/realtime_api_server.py"]
+# Set Python path
+ENV PYTHONPATH=/app
 
+# Run the server
+CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000"]

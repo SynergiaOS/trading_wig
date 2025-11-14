@@ -51,3 +51,6 @@ uvicorn>=0.18.0
 # Financial data processing (optional)
 yfinance>=0.1.87
 ta-lib>=0.4.0
+
+# HTTP requests (required for telegram_alerts and pattern detection)
+requests>=2.28.0

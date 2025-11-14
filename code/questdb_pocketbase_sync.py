@@ -831,11 +831,12 @@ class QuestDBPocketbaseSync:
 
 async def main():
     """Main function to run the data ingestion service"""
-    # Configuration
-    QUESTDB_PATH = "/workspace/code/questdb_wig80_test.db"
-    POCKETBASE_URL = "http://localhost:8090"
-    ADMIN_EMAIL = "admin@example.com"  # Update with actual admin email
-    ADMIN_PASSWORD = "admin123"  # Update with actual admin password
+    # Configuration (use environment variables for Railway service discovery)
+    import os
+    QUESTDB_PATH = os.getenv('QUESTDB_PATH', '/workspace/code/questdb_wig80_test.db')
+    POCKETBASE_URL = os.getenv('POCKETBASE_URL', 'http://localhost:8090')
+    ADMIN_EMAIL = os.getenv('POCKETBASE_ADMIN_EMAIL', 'admin@example.com')
+    ADMIN_PASSWORD = os.getenv('POCKETBASE_ADMIN_PASSWORD', 'admin123')
     
     # Create logs directory
     Path("/workspace/logs").mkdir(exist_ok=True)

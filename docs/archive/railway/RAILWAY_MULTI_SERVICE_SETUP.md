@@ -62,8 +62,8 @@ Projekt składa się z 3 serwisów:
    - W Settings → Deploy → Start Command: (puste, używa CMD z Dockerfile)
    - W Settings → Network → Port: `8001`
    - W Settings → Variables:
-     - `ANALYSIS_PORT=8001`
-     - `ANALYSIS_HOST=0.0.0.0`
+     - `PORT=8001`
+     - `HOST=0.0.0.0`
 
 5. **Skonfiguruj zmienne środowiskowe**
    - W każdym serwisie dodaj:
@@ -72,11 +72,39 @@ Projekt składa się z 3 serwisów:
      - **Backend**: Używa danych z `data/wig80_current_data.json`
      - **Analysis**: Używa danych z `data/wig80_current_data.json`
 
-6. **Utwórz Private Network (opcjonalnie)**
-   - Railway automatycznie tworzy private network między serwisami
-   - Możesz używać nazw serwisów jako hostnames:
+6. **Skonfiguruj zmienne środowiskowe dla Railway Service Discovery**
+   
+   W Railway usługi łączą się ze sobą przez **private network** lub **publiczne URL-e**. 
+   Kod został zaktualizowany, aby używał zmiennych środowiskowych zamiast hardcoded `localhost`.
+   
+   **Dla Backend Service** (jeśli używa Pocketbase, QuestDB, Redis):
+   ```bash
+   # Jeśli masz osobne serwisy dla tych baz danych:
+   POCKETBASE_URL=http://pocketbase-service.railway.internal:8090
+   QUESTDB_HOST=questdb-service.railway.internal
+   QUESTDB_PORT=9009
+   REDIS_URL=redis://redis-service.railway.internal:6379
+   
+   # Lub użyj publicznych URL-i:
+   POCKETBASE_URL=https://pocketbase-service.railway.app
+   QUESTDB_HOST=questdb-service.railway.app
+   REDIS_URL=redis://redis-service.railway.app:6379
+   ```
+   
+   **Dla Analysis Service** (jeśli używa Pocketbase, QuestDB, Redis):
+   ```bash
+   # Te same zmienne jak dla Backend Service
+   POCKETBASE_URL=http://pocketbase-service.railway.internal:8090
+   QUESTDB_HOST=questdb-service.railway.internal
+   QUESTDB_PORT=9009
+   REDIS_URL=redis://redis-service.railway.internal:6379
+   ```
+   
+   **Uwaga**: Railway automatycznie tworzy private network między serwisami w tym samym projekcie.
+   Możesz używać nazw serwisów jako hostnames:
      - `backend-service.railway.internal:8000`
      - `analysis-service.railway.internal:8001`
+     - `pocketbase-service.railway.internal:8090`
 
 ### Metoda 2: Railway CLI
 
@@ -102,8 +130,8 @@ railway variables set HOST=0.0.0.0
 
 # Dodaj analysis service (w nowym terminalu)
 railway add --dockerfile Dockerfile.analysis
-railway variables set ANALYSIS_PORT=8001
-railway variables set ANALYSIS_HOST=0.0.0.0
+railway variables set PORT=8001
+railway variables set HOST=0.0.0.0
 ```
 
 ## 🔗 Konfiguracja URL-i
@@ -145,12 +173,22 @@ VITE_REFRESH_INTERVAL=30000
 ```env
 PORT=8000
 HOST=0.0.0.0
+# Railway Service Discovery (opcjonalnie, jeśli używasz Pocketbase, QuestDB, Redis)
+POCKETBASE_URL=http://pocketbase-service.railway.internal:8090
+QUESTDB_HOST=questdb-service.railway.internal
+QUESTDB_PORT=9009
+REDIS_URL=redis://redis-service.railway.internal:6379
 ```
 
 ### Analysis API
 ```env
-ANALYSIS_PORT=8001
-ANALYSIS_HOST=0.0.0.0
+PORT=8001
+HOST=0.0.0.0
+# Railway Service Discovery (opcjonalnie, jeśli używasz Pocketbase, QuestDB, Redis)
+POCKETBASE_URL=http://pocketbase-service.railway.internal:8090
+QUESTDB_HOST=questdb-service.railway.internal
+QUESTDB_PORT=9009
+REDIS_URL=redis://redis-service.railway.internal:6379
 ```
 
 ## 🔍 Weryfikacja

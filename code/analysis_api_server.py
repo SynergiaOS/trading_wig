@@ -4,15 +4,15 @@ Analysis API Server - Serves AI analysis results for clients
 Provides endpoints for displaying analysis results in the frontend
 """
 
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 import json
 import os
 import sys
 from urllib.parse import urlparse, parse_qs
 from datetime import datetime
 
-# Add parent directory to path for imports
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add code directory to path for imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 class AnalysisAPIHandler(BaseHTTPRequestHandler):
     """Handler for analysis API endpoints"""
@@ -174,18 +174,19 @@ class AnalysisAPIHandler(BaseHTTPRequestHandler):
         
         return insights
     
+    def _get_cors_origin(self):
+        """Get CORS origin from environment or default to *"""
+        return os.environ.get('ALLOWED_ORIGIN', '*')
+    
     def do_GET(self):
         """Handle GET requests"""
         parsed_path = urlparse(self.path)
         path = parsed_path.path
         
-        # CORS headers
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-        self.end_headers()
+        # Determine status code and response before sending headers
+        status_code = 200
+        response = None
+        error_message = None
         
         try:
             if path == '/api/analysis' or path == '/api/analysis/':
@@ -206,6 +207,7 @@ class AnalysisAPIHandler(BaseHTTPRequestHandler):
                     "total_analyses": len(analyses),
                     "analyses": analyses
                 }
+                status_code = 200
                 
             elif path == '/api/analysis/top' or path == '/api/analysis/top/':
                 # Get top opportunities
@@ -229,12 +231,11 @@ class AnalysisAPIHandler(BaseHTTPRequestHandler):
                     "limit": limit,
                     "analyses": top_analyses
                 }
+                status_code = 200
                 
             elif path == '/api/analysis/patterns' or path == '/api/analysis/patterns/':
                 # Get all companies with detected patterns
                 try:
-                    # Import PatternDetector
-                    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
                     from telegram_alerts import PatternDetector
                     
                     data = self._load_wig80_data()
@@ -265,8 +266,10 @@ class AnalysisAPIHandler(BaseHTTPRequestHandler):
                         "total_with_patterns": len(companies_with_patterns),
                         "companies": companies_with_patterns
                     }
+                    status_code = 200
                 except Exception as e:
-                    error_response = {
+                    status_code = 500
+                    response = {
                         "error": {
                             "code": "PATTERNS_ERROR",
                             "message": str(e)
@@ -275,43 +278,69 @@ class AnalysisAPIHandler(BaseHTTPRequestHandler):
                         "total_with_patterns": 0,
                         "companies": []
                     }
-                    self.wfile.write(json.dumps(error_response).encode('utf-8'))
-                    return
                 
             elif path.startswith('/api/analysis/'):
                 # Get analysis for specific symbol (but not /top or /patterns)
                 symbol = path.split('/')[-1].upper()
                 if symbol in ['TOP', 'PATTERNS']:
-                    self.send_error(404, f"Use /api/analysis/{symbol.lower()} endpoint")
-                    return
-                    
-                data = self._load_wig80_data()
-                companies = data.get('companies', [])
-                
-                company = next((c for c in companies if c.get('symbol', '').upper() == symbol), None)
-                
-                if company:
-                    analysis = self._generate_analysis(company)
-                    # Add patterns
-                    from telegram_alerts import PatternDetector
-                    pattern_detector = PatternDetector()
-                    patterns = pattern_detector.detect_patterns(company)
-                    analysis['patterns'] = patterns
-                    
-                    response = {
-                        "timestamp": datetime.now().isoformat(),
-                        "analysis": analysis
-                    }
+                    status_code = 404
+                    error_message = f"Use /api/analysis/{symbol.lower()} endpoint"
                 else:
-                    self.send_error(404, "Company not found")
-                    return
+                    data = self._load_wig80_data()
+                    companies = data.get('companies', [])
+                    
+                    company = next((c for c in companies if c.get('symbol', '').upper() == symbol), None)
+                    
+                    if company:
+                        analysis = self._generate_analysis(company)
+                        # Add patterns
+                        try:
+                            from telegram_alerts import PatternDetector
+                            pattern_detector = PatternDetector()
+                            patterns = pattern_detector.detect_patterns(company)
+                            analysis['patterns'] = patterns
+                        except Exception as e:
+                            print(f"Error detecting patterns for {symbol}: {e}")
+                            analysis['patterns'] = []
+                        
+                        response = {
+                            "timestamp": datetime.now().isoformat(),
+                            "analysis": analysis
+                        }
+                        status_code = 200
+                    else:
+                        status_code = 404
+                        error_message = "Company not found"
             else:
-                self.send_error(404, "Not Found")
+                status_code = 404
+                error_message = "Not Found"
+            
+            # Send response with proper status code
+            if error_message:
+                self.send_error(status_code, error_message)
                 return
-                
-            self.wfile.write(json.dumps(response, ensure_ascii=False, indent=2).encode('utf-8'))
+            
+            # Send success response with headers
+            self.send_response(status_code)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', self._get_cors_origin())
+            self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+            self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+            self.end_headers()
+            
+            if response:
+                self.wfile.write(json.dumps(response, ensure_ascii=False, indent=2).encode('utf-8'))
             
         except Exception as e:
+            # Send error response
+            status_code = 500
+            self.send_response(status_code)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', self._get_cors_origin())
+            self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+            self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+            self.end_headers()
+            
             error_response = {
                 "error": {
                     "code": "ANALYSIS_ERROR",
@@ -324,7 +353,7 @@ class AnalysisAPIHandler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
         """Handle OPTIONS requests for CORS"""
         self.send_response(200)
-        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Origin', self._get_cors_origin())
         self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
@@ -336,7 +365,7 @@ class AnalysisAPIHandler(BaseHTTPRequestHandler):
 def run_server(port=8001, host='0.0.0.0'):
     """Run the Analysis API server"""
     server_address = (host, port)
-    httpd = HTTPServer(server_address, AnalysisAPIHandler)
+    httpd = ThreadingHTTPServer(server_address, AnalysisAPIHandler)
     
     print(f"\n{'='*70}")
     print(f"AI Analysis API Server")
@@ -356,7 +385,7 @@ def run_server(port=8001, host='0.0.0.0'):
 
 if __name__ == "__main__":
     import sys
-    port = int(os.environ.get('ANALYSIS_PORT', 8001))
-    host = os.environ.get('ANALYSIS_HOST', '0.0.0.0')
+    port = int(os.environ.get('PORT', 8001))
+    host = os.environ.get('HOST', '0.0.0.0')
     run_server(port=port, host=host)
 

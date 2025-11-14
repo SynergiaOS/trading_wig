@@ -42,11 +42,11 @@ import uvicorn
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Configuration
-POCKETBASE_URL = "http://localhost:8090"
-API_HOST = "0.0.0.0"
-API_PORT = 8090
-DB_PATH = "/workspace/code/wig80_pocketbase.db"
+# Configuration (use environment variables for Railway service discovery)
+POCKETBASE_URL = os.getenv('POCKETBASE_URL', 'http://localhost:8090')
+API_HOST = os.getenv('API_HOST', '0.0.0.0')
+API_PORT = int(os.getenv('API_PORT', '8090'))
+DB_PATH = os.getenv('DB_PATH', '/workspace/code/wig80_pocketbase.db')
 
 # ===============================
 # DATA MODELS

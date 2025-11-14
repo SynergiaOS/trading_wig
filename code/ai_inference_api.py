@@ -103,13 +103,13 @@ class InferenceConfig:
     reload: bool = False
     cors_origins: List[str] = None
     
-    # Database settings
-    questdb_host: str = "localhost"
-    questdb_port: int = 9009
-    questdb_user: str = "admin"
-    questdb_password: str = "quest"
-    pocketbase_url: str = "http://localhost:8090"
-    redis_url: str = "redis://localhost:6379"
+    # Database settings (use environment variables for Railway service discovery)
+    questdb_host: str = None
+    questdb_port: int = None
+    questdb_user: str = None
+    questdb_password: str = None
+    pocketbase_url: str = None
+    redis_url: str = None
     
     # Performance settings
     max_request_size: int = 1000
@@ -123,8 +123,22 @@ class InferenceConfig:
     metrics_port: int = 8002
     
     def __post_init__(self):
+        import os
         if self.cors_origins is None:
             self.cors_origins = ["*"]
+        # Load from environment variables (Railway service discovery)
+        if self.questdb_host is None:
+            self.questdb_host = os.getenv('QUESTDB_HOST', 'localhost')
+        if self.questdb_port is None:
+            self.questdb_port = int(os.getenv('QUESTDB_PORT', '9009'))
+        if self.questdb_user is None:
+            self.questdb_user = os.getenv('QUESTDB_USER', 'admin')
+        if self.questdb_password is None:
+            self.questdb_password = os.getenv('QUESTDB_PASSWORD', 'quest')
+        if self.pocketbase_url is None:
+            self.pocketbase_url = os.getenv('POCKETBASE_URL', 'http://localhost:8090')
+        if self.redis_url is None:
+            self.redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379')
 
 # Pydantic models for API
 class AnalysisRequest(BaseModel):

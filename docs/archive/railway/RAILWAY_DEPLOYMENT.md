@@ -80,6 +80,7 @@ PYTHON_VERSION=3.12
 PORT=8001
 HOST=0.0.0.0
 PYTHON_VERSION=3.12
+ALLOWED_ORIGIN=*  # Optional: restrict CORS origins in production
 ```
 
 **Build Settings:**
@@ -109,6 +110,7 @@ PYTHON_VERSION=3.12
 PORT=8001
 HOST=0.0.0.0
 PYTHON_VERSION=3.12
+ALLOWED_ORIGIN=*  # Optional: restrict CORS origins in production
 ```
 
 ### Krok 4: Konfiguracja Portów i Domen

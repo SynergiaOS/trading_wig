@@ -1,6 +1,33 @@
 # Railway CLI Setup - Konfiguracja z Terminala
 
-## 🚀 Automatyczna Konfiguracja
+## 🆕 Tworzenie Nowego Projektu
+
+### Automatyczne Tworzenie Projektu
+
+Uruchom skrypt do tworzenia nowego projektu:
+
+```bash
+./create-railway-project.sh
+```
+
+Skrypt:
+- ✅ Utworzy nowy projekt Railway
+- ✅ Opcjonalnie doda 3 serwisy (frontend, backend, analysis)
+- ✅ Pokaże następne kroki
+
+### Ręczne Tworzenie Projektu
+
+```bash
+# Utwórz nowy projekt
+railway init
+
+# Lub z nazwą projektu
+railway init trading-wig
+```
+
+## 🚀 Dodawanie Serwisów do Istniejącego Projektu
+
+### Automatyczna Konfiguracja
 
 Uruchom skrypt setup:
 
@@ -34,6 +61,13 @@ railway add --service backend --repo SynergiaOS/trading_wig
 railway service backend
 railway variables --set "PORT=8000" --service backend
 railway variables --set "HOST=0.0.0.0" --service backend
+# Railway Service Discovery (jeśli używasz osobnych serwisów dla baz danych)
+railway variables --set "POCKETBASE_URL=http://pocketbase-service.railway.internal:8090" --service backend
+railway variables --set "QUESTDB_HOST=questdb-service.railway.internal" --service backend
+railway variables --set "QUESTDB_PORT=9009" --service backend
+railway variables --set "QUESTDB_USER=admin" --service backend
+railway variables --set "QUESTDB_PASSWORD=quest" --service backend
+railway variables --set "REDIS_URL=redis://redis-service.railway.internal:6379" --service backend
 ```
 
 **⚠️ WAŻNE**: W Railway Dashboard ustaw:
@@ -46,6 +80,13 @@ railway add --service analysis --repo SynergiaOS/trading_wig
 railway service analysis
 railway variables --set "ANALYSIS_PORT=8001" --service analysis
 railway variables --set "ANALYSIS_HOST=0.0.0.0" --service analysis
+# Railway Service Discovery (jeśli używasz osobnych serwisów dla baz danych)
+railway variables --set "POCKETBASE_URL=http://pocketbase-service.railway.internal:8090" --service analysis
+railway variables --set "QUESTDB_HOST=questdb-service.railway.internal" --service analysis
+railway variables --set "QUESTDB_PORT=9009" --service analysis
+railway variables --set "QUESTDB_USER=admin" --service analysis
+railway variables --set "QUESTDB_PASSWORD=quest" --service analysis
+railway variables --set "REDIS_URL=redis://redis-service.railway.internal:6379" --service analysis
 ```
 
 **⚠️ WAŻNE**: W Railway Dashboard ustaw:

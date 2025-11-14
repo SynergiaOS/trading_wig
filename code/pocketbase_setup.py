@@ -28,7 +28,8 @@ from datetime import datetime, timedelta
 import time
 
 # Configuration
-POCKETBASE_URL = "http://localhost:8090"
+# Use environment variables for Railway service discovery
+POCKETBASE_URL = os.getenv('POCKETBASE_URL', 'http://localhost:8090')
 API_BASE = f"{POCKETBASE_URL}/api"
 ENHANCED_API_PATH = "/workspace/code/enhanced_pocketbase_setup.py"
 

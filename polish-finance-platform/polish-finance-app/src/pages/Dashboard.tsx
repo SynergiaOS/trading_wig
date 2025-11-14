@@ -1,106 +1,203 @@
-import { useEffect, useState, useCallback } from 'react';
-import { TrendingUp, TrendingDown, BarChart3, Search, Activity, RefreshCw, Clock, AlertTriangle, Zap, LineChart, Wifi, WifiOff } from 'lucide-react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useTheme } from 'next-themes';
+import { toast } from 'sonner';
+import { TrendingUp, TrendingDown, BarChart3, Search, Activity, RefreshCw, Clock, AlertTriangle, Zap, LineChart, Wifi, WifiOff, Moon, Sun, Star, Download, Heart, HeartOff, Server } from 'lucide-react';
 import { formatPLN, formatPercent, getMarketStatus, calculateScore, getChangeColor, getHeatMapColor, getDataFreshnessStatus, formatTimeAgo } from '../lib/formatters';
 import { getTrendMomentum, getTrendDescription, calculateRSI, getRSIInterpretation, getVolumeStrength, getRiskAssessment, formatLastUpdate, getMarketCountdown } from '../lib/trendAnalysis';
-import { fetchRealTimeData, getDataSource, fetchPatternsData, type CompanyWithPatterns, type TechnicalPattern } from '../lib/dataService';
+import { getDataSource } from '../lib/dataService';
+import { getWatchlist, addToWatchlist, removeFromWatchlist, isInWatchlist } from '../lib/watchlistService';
+import { exportToCSV, exportToJSON } from '../lib/exportService';
+import { checkBackendHealth, getBackendStats } from '../lib/backendService';
 import ChartModal from '../components/ChartModal';
-
-interface Company {
-  company_name: string;
-  symbol: string;
-  current_price: number;
-  change_percent: number;
-  pe_ratio: number | null;
-  pb_ratio: number | null;
-  trading_volume: string;
-  trading_volume_obrot?: string;
-  last_update?: string;
-  status?: string;
-  score?: number;
-}
+import CompanyAnalysisModal from '../components/CompanyAnalysisModal';
+import { useMarketData } from '../features/market-dashboard/hooks/useMarketData';
+import { usePatterns } from '../features/market-dashboard/hooks/usePatterns';
+import type { Company, MarketIndex, SortBy, SortOrder, ViewMode, FilterCategory } from '../types/market';
 
 export default function Dashboard() {
-  const [companies, setCompanies] = useState<Company[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { theme, setTheme } = useTheme();
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterCategory, setFilterCategory] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<'change' | 'pe' | 'pb' | 'score'>('change');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
-  const [viewMode, setViewMode] = useState<'table' | 'heatmap'>('table');
-  const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [filterCategory, setFilterCategory] = useState<FilterCategory>('all');
+  const [sortBy, setSortBy] = useState<SortBy>('change');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
+  const [viewMode, setViewMode] = useState<ViewMode>('table');
   const [countdown, setCountdown] = useState(30);
   const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
-  const [dataSourceInfo, setDataSourceInfo] = useState<string>('');
-  const [connectionError, setConnectionError] = useState<string | null>(null);
-  const [companiesWithPatterns, setCompaniesWithPatterns] = useState<CompanyWithPatterns[]>([]);
-  const [patternsLoading, setPatternsLoading] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState<'WIG80' | 'WIG30'>('WIG80');
+  const [showAnalysisModal, setShowAnalysisModal] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<MarketIndex>('WIG80');
+  const [watchlist, setWatchlist] = useState<string[]>([]);
+  const [backendHealth, setBackendHealth] = useState<'healthy' | 'degraded' | 'down' | 'checking'>('checking');
+  const [showWatchlistOnly, setShowWatchlistOnly] = useState(false);
+
+  // React Query hooks for data fetching
+  const { 
+    companies: rawCompanies, 
+    metadata, 
+    isLoading: loading, 
+    isRefetching: isRefreshing,
+    error: marketError,
+    refresh 
+  } = useMarketData(selectedIndex);
+
+  const { 
+    companiesWithPatterns, 
+    isLoading: patternsLoading 
+  } = usePatterns();
+
+  // Calculate scores and prepare companies
+  const companies = useMemo(() => {
+    return rawCompanies.map(c => ({
+      ...c,
+      score: calculateScore(c)
+    }));
+  }, [rawCompanies]);
+
+  const lastUpdate = useMemo(() => {
+    return metadata?.collection_date ? new Date(metadata.collection_date) : new Date();
+  }, [metadata]);
+
+  const dataSourceInfo = useMemo(() => getDataSource(), []);
+  const connectionError = marketError ? 'Błąd połączenia z danymi. Pokazywanie ostatnich dostępnych danych.' : null;
 
   const marketStatus = getMarketStatus();
   const marketCountdown = getMarketCountdown();
 
-  const loadCompanies = useCallback(async () => {
-    try {
-      setIsRefreshing(true);
-      setConnectionError(null);
-      
-      // Fetch real-time data for selected index
-      const data = await fetchRealTimeData(selectedIndex);
-      
-      const companiesData = data.companies.map((c: any) => ({
-        ...c,
-        score: calculateScore(c)
-      }));
-      
-      setCompanies(companiesData);
-      setLastUpdate(new Date(data.metadata.collection_date || new Date()));
-      setDataSourceInfo(getDataSource());
-      setCountdown(30); // Reset countdown
-    } catch (error) {
-      console.error('Error loading companies:', error);
-      setConnectionError('Błąd połączenia z danymi. Pokazywanie ostatnich dostępnych danych.');
-      // Don't clear companies on error - keep showing last known data
-    } finally {
-      setLoading(false);
-      setIsRefreshing(false);
-    }
-  }, [selectedIndex]);
-
+  // Load watchlist on mount
   useEffect(() => {
-    loadCompanies();
-    loadPatterns();
-  }, [loadCompanies]);
-
-  const loadPatterns = useCallback(async () => {
-    try {
-      setPatternsLoading(true);
-      const patternsData = await fetchPatternsData();
-      setCompaniesWithPatterns(patternsData.companies || []);
-    } catch (error) {
-      console.error('Error loading patterns:', error);
-    } finally {
-      setPatternsLoading(false);
-    }
+    const watchlistItems = getWatchlist();
+    setWatchlist(watchlistItems.map(item => item.symbol));
   }, []);
 
-  // Auto-refresh patterns every 60 seconds
+  // Check backend health
   useEffect(() => {
-    const patternsInterval = setInterval(() => {
-      loadPatterns();
-    }, 60000);
+    const checkHealth = async () => {
+      const health = await checkBackendHealth();
+      if (health) {
+        setBackendHealth(health.status);
+      }
+    };
+    
+    checkHealth();
+    const healthInterval = setInterval(checkHealth, 60000); // Check every minute
+    return () => clearInterval(healthInterval);
+  }, []);
 
-    return () => clearInterval(patternsInterval);
-  }, [loadPatterns]);
+  const handleToggleWatchlist = (company: Company) => {
+    const inWatchlist = isInWatchlist(company.symbol);
+    if (inWatchlist) {
+      removeFromWatchlist(company.symbol);
+      setWatchlist(prev => prev.filter(s => s !== company.symbol));
+      toast.success(`${company.symbol} usunięto z obserwowanych`);
+    } else {
+      addToWatchlist(company.symbol, company.company_name);
+      setWatchlist(prev => [...prev, company.symbol]);
+      toast.success(`${company.symbol} dodano do obserwowanych`);
+    }
+  };
 
-  // Auto-refresh every 30 seconds
-  useEffect(() => {
-    const refreshInterval = setInterval(() => {
-      loadCompanies();
-    }, 30000);
+  // Calculate statistics
+  const avgChange = useMemo(() => {
+    return companies.length > 0
+      ? companies.reduce((sum, c) => sum + c.change_percent, 0) / companies.length
+      : 0;
+  }, [companies]);
 
-    return () => clearInterval(refreshInterval);
-  }, [loadCompanies]);
+  const topGainers = useMemo(() => {
+    return [...companies]
+      .filter(c => c.change_percent > 0)
+      .sort((a, b) => b.change_percent - a.change_percent)
+      .slice(0, 4);
+  }, [companies]);
+
+  const topLosers = useMemo(() => {
+    return [...companies]
+      .filter(c => c.change_percent < 0)
+      .sort((a, b) => a.change_percent - b.change_percent)
+      .slice(0, 4);
+  }, [companies]);
+
+  const volumeLeaders = useMemo(() => {
+    return [...companies]
+      .sort((a, b) => {
+        const aVol = parseFloat(a.trading_volume?.replace(/[^\d.]/g, '') || '0');
+        const bVol = parseFloat(b.trading_volume?.replace(/[^\d.]/g, '') || '0');
+        return bVol - aVol;
+      })
+      .slice(0, 3);
+  }, [companies]);
+
+  // Filtering and sorting
+  const filteredCompanies = useMemo(() => {
+    return companies
+      .filter(company => {
+        const matchesSearch = 
+          company.company_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          company.symbol.toLowerCase().includes(searchTerm.toLowerCase());
+        
+        // Watchlist filter
+        if (showWatchlistOnly && !isInWatchlist(company.symbol)) {
+          return false;
+        }
+        
+        if (filterCategory === 'all') return matchesSearch;
+        if (filterCategory === 'gainers') return matchesSearch && company.change_percent > 0;
+        if (filterCategory === 'losers') return matchesSearch && company.change_percent < 0;
+        if (filterCategory === 'value') return matchesSearch && company.pb_ratio && company.pb_ratio < 2;
+        if (filterCategory === 'momentum') return matchesSearch && Math.abs(company.change_percent) >= 5;
+        return matchesSearch;
+      })
+      .sort((a, b) => {
+        let aValue, bValue;
+        
+        switch (sortBy) {
+          case 'change':
+            aValue = a.change_percent;
+            bValue = b.change_percent;
+            break;
+          case 'pe':
+            aValue = a.pe_ratio || 999;
+            bValue = b.pe_ratio || 999;
+            break;
+          case 'pb':
+            aValue = a.pb_ratio || 999;
+            bValue = b.pb_ratio || 999;
+            break;
+          case 'score':
+            aValue = a.score || 0;
+            bValue = b.score || 0;
+            break;
+          default:
+            aValue = a.change_percent;
+            bValue = b.change_percent;
+        }
+        
+        return sortOrder === 'asc' ? aValue - bValue : bValue - aValue;
+      });
+  }, [companies, searchTerm, filterCategory, sortBy, sortOrder, showWatchlistOnly]);
+
+  const handleExportCSV = () => {
+    try {
+      exportToCSV(filteredCompanies, `wig80_${selectedIndex.toLowerCase()}`);
+      toast.success('Dane wyeksportowano do CSV');
+    } catch (error) {
+      toast.error('Błąd podczas eksportu do CSV');
+    }
+  };
+
+  const handleExportJSON = () => {
+    try {
+      exportToJSON(filteredCompanies, `wig80_${selectedIndex.toLowerCase()}`);
+      toast.success('Dane wyeksportowano do JSON');
+    } catch (error) {
+      toast.error('Błąd podczas eksportu do JSON');
+    }
+  };
+
+  const handleRefresh = () => {
+    refresh();
+    setCountdown(30);
+    toast.success(`Odświeżanie danych...`, { duration: 1000 });
+  };
 
   // Countdown timer
   useEffect(() => {
@@ -115,71 +212,6 @@ export default function Dashboard() {
 
     return () => clearInterval(countdownInterval);
   }, []);
-
-  // Calculate statistics
-  const avgChange = companies.length > 0
-    ? companies.reduce((sum, c) => sum + c.change_percent, 0) / companies.length
-    : 0;
-
-  const topGainers = [...companies]
-    .filter(c => c.change_percent > 0)
-    .sort((a, b) => b.change_percent - a.change_percent)
-    .slice(0, 4);
-
-  const topLosers = [...companies]
-    .filter(c => c.change_percent < 0)
-    .sort((a, b) => a.change_percent - b.change_percent)
-    .slice(0, 4);
-
-  const volumeLeaders = [...companies]
-    .sort((a, b) => {
-      const aVol = parseFloat(a.trading_volume?.replace(/[^\d.]/g, '') || '0');
-      const bVol = parseFloat(b.trading_volume?.replace(/[^\d.]/g, '') || '0');
-      return bVol - aVol;
-    })
-    .slice(0, 3);
-
-  // Filtering and sorting
-  const filteredCompanies = companies
-    .filter(company => {
-      const matchesSearch = 
-        company.company_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        company.symbol.toLowerCase().includes(searchTerm.toLowerCase());
-      
-      if (filterCategory === 'all') return matchesSearch;
-      if (filterCategory === 'gainers') return matchesSearch && company.change_percent > 0;
-      if (filterCategory === 'losers') return matchesSearch && company.change_percent < 0;
-      if (filterCategory === 'value') return matchesSearch && company.pb_ratio && company.pb_ratio < 2;
-      if (filterCategory === 'momentum') return matchesSearch && Math.abs(company.change_percent) >= 5;
-      return matchesSearch;
-    })
-    .sort((a, b) => {
-      let aValue, bValue;
-      
-      switch (sortBy) {
-        case 'change':
-          aValue = a.change_percent;
-          bValue = b.change_percent;
-          break;
-        case 'pe':
-          aValue = a.pe_ratio || 999;
-          bValue = b.pe_ratio || 999;
-          break;
-        case 'pb':
-          aValue = a.pb_ratio || 999;
-          bValue = b.pb_ratio || 999;
-          break;
-        case 'score':
-          aValue = a.score || 0;
-          bValue = b.score || 0;
-          break;
-        default:
-          aValue = a.change_percent;
-          bValue = b.change_percent;
-      }
-      
-      return sortOrder === 'asc' ? aValue - bValue : bValue - aValue;
-    });
 
   const lastUpdateInfo = formatLastUpdate(lastUpdate);
 
@@ -317,9 +349,34 @@ export default function Dashboard() {
               </div>
             </div>
             
-            {/* Activity Indicator */}
-            <div className="p-2.5 rounded-lg bg-primary-gradient">
-              <Activity className="w-6 h-6 text-text-inverse" />
+            {/* Backend Health Indicator */}
+            <div className="flex items-center space-x-2">
+              <div className={`p-2 rounded-lg transition-all duration-250 ${
+                backendHealth === 'healthy' ? 'bg-success-gradient/20' :
+                backendHealth === 'degraded' ? 'bg-warning-gradient/20' :
+                backendHealth === 'down' ? 'bg-danger-gradient/20' :
+                'bg-surface-hover'
+              }`}>
+                <Server className={`w-4 h-4 ${
+                  backendHealth === 'healthy' ? 'text-success-400' :
+                  backendHealth === 'degraded' ? 'text-warning-400' :
+                  backendHealth === 'down' ? 'text-danger-400' :
+                  'text-text-tertiary'
+                }`} />
+              </div>
+              
+              {/* Dark Mode Toggle */}
+              <button
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="p-2 rounded-lg bg-surface-hover hover:bg-surface-modal transition-all duration-250"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? (
+                  <Sun className="w-5 h-5 text-text-secondary hover:text-warning-400 transition-colors" />
+                ) : (
+                  <Moon className="w-5 h-5 text-text-secondary hover:text-primary-400 transition-colors" />
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -845,12 +902,30 @@ export default function Dashboard() {
                       </div>
                     </div>
 
-                    {/* Action indicator */}
-                    <div className="flex items-center justify-center pt-2">
-                      <div className="flex items-center space-x-2 text-xs text-text-tertiary group-hover:text-success-400 transition-colors duration-250">
-                        <LineChart className="w-4 h-4" />
-                        <span>Kliknij aby zobaczyć wykres</span>
-                      </div>
+                    {/* Action buttons */}
+                    <div className="flex items-center justify-center gap-2 pt-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedCompany(company);
+                          setShowAnalysisModal(true);
+                        }}
+                        className="flex items-center space-x-2 px-3 py-1.5 bg-primary-gradient/10 hover:bg-primary-gradient/20 text-primary-400 rounded-lg text-xs font-semibold transition-all duration-250 border border-primary-400/30"
+                      >
+                        <Activity className="w-3 h-3" />
+                        <span>Analiza</span>
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedCompany(company);
+                          setShowAnalysisModal(false);
+                        }}
+                        className="flex items-center space-x-2 px-3 py-1.5 bg-surface-hover hover:bg-surface-modal text-text-secondary hover:text-text-primary rounded-lg text-xs font-semibold transition-all duration-250 border border-border-subtle"
+                      >
+                        <LineChart className="w-3 h-3" />
+                        <span>Wykres</span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -892,6 +967,45 @@ export default function Dashboard() {
 
               {/* Search and View Controls */}
               <div className="flex items-center gap-4 w-full lg:w-auto">
+                {/* Watchlist Toggle */}
+                <button
+                  onClick={() => {
+                    setShowWatchlistOnly(!showWatchlistOnly);
+                    toast.info(showWatchlistOnly ? 'Pokazuję wszystkie spółki' : 'Pokazuję tylko obserwowane');
+                  }}
+                  className={`flex items-center space-x-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-250 min-h-[44px] focus-ring ${
+                    showWatchlistOnly
+                      ? 'bg-primary-gradient text-text-inverse shadow-glow-primary border border-primary-400/30'
+                      : 'bg-surface-hover text-text-secondary hover:text-text-primary hover:bg-surface-modal border border-border-subtle hover:border-primary-400/30'
+                  }`}
+                >
+                  <Star className={`w-4 h-4 ${showWatchlistOnly ? 'fill-current' : ''}`} />
+                  <span className="hidden sm:inline">Obserwowane</span>
+                  {watchlist.length > 0 && (
+                    <span className="px-2 py-0.5 rounded-full bg-primary-400/20 text-xs font-bold">
+                      {watchlist.length}
+                    </span>
+                  )}
+                </button>
+
+                {/* Export Buttons */}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleExportCSV}
+                    className="p-3 rounded-xl bg-surface-hover hover:bg-surface-modal border border-border-subtle hover:border-success-400/30 transition-all duration-250"
+                    title="Eksportuj do CSV"
+                  >
+                    <Download className="w-4 h-4 text-text-secondary hover:text-success-400 transition-colors" />
+                  </button>
+                  <button
+                    onClick={handleExportJSON}
+                    className="p-3 rounded-xl bg-surface-hover hover:bg-surface-modal border border-border-subtle hover:border-primary-400/30 transition-all duration-250"
+                    title="Eksportuj do JSON"
+                  >
+                    <Download className="w-4 h-4 text-text-secondary hover:text-primary-400 transition-colors" />
+                  </button>
+                </div>
+
                 {/* Enhanced Search */}
                 <div className="relative flex-1 lg:flex-initial">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-tertiary" />
@@ -1058,21 +1172,41 @@ export default function Dashboard() {
                     return (
                       <tr
                         key={company.symbol}
-                        onClick={() => setSelectedCompany(company)}
+                        onClick={() => {
+                          setSelectedCompany(company);
+                          setShowAnalysisModal(false);
+                        }}
                         className={`border-b border-border-subtle hover:bg-surface-hover transition-all duration-200 cursor-pointer group ${
                           index % 2 === 0 ? 'bg-surface-elevated' : 'bg-transparent'
                         }`}
                       >
                         {/* Symbol - Always visible */}
                         <td className="px-6 py-4">
-                          <div className="flex flex-col space-y-1">
-                            <span className="text-lg font-bold text-primary-400 font-mono group-hover:text-primary-300 transition-colors duration-200">
-                              {company.symbol}
-                            </span>
-                            {/* Company name on mobile */}
-                            <span className="text-xs text-text-secondary md:hidden truncate max-w-[120px]">
-                              {company.company_name}
-                            </span>
+                          <div className="flex items-center space-x-2">
+                            <div className="flex flex-col space-y-1">
+                              <span className="text-lg font-bold text-primary-400 font-mono group-hover:text-primary-300 transition-colors duration-200">
+                                {company.symbol}
+                              </span>
+                              {/* Company name on mobile */}
+                              <span className="text-xs text-text-secondary md:hidden truncate max-w-[120px]">
+                                {company.company_name}
+                              </span>
+                            </div>
+                            {/* Watchlist Button */}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleToggleWatchlist(company);
+                              }}
+                              className="p-1.5 rounded-lg hover:bg-surface-hover transition-colors"
+                              title={isInWatchlist(company.symbol) ? 'Usuń z obserwowanych' : 'Dodaj do obserwowanych'}
+                            >
+                              {isInWatchlist(company.symbol) ? (
+                                <Heart className="w-4 h-4 text-danger-400 fill-current" />
+                              ) : (
+                                <HeartOff className="w-4 h-4 text-text-tertiary hover:text-danger-400" />
+                              )}
+                            </button>
                           </div>
                         </td>
 
@@ -1181,6 +1315,18 @@ export default function Dashboard() {
                             <span className="text-sm font-semibold text-text-secondary font-mono min-w-[40px]">
                               {company.score}%
                             </span>
+                            {/* Analysis button */}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedCompany(company);
+                                setShowAnalysisModal(true);
+                              }}
+                              className="p-1.5 rounded-lg hover:bg-primary-gradient/20 text-primary-400 hover:text-primary-300 transition-all duration-250"
+                              title="Szczegółowa analiza"
+                            >
+                              <Activity className="w-4 h-4" />
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -1382,10 +1528,21 @@ export default function Dashboard() {
       </footer>
 
       {/* Chart Modal */}
-      {selectedCompany && (
+      {selectedCompany && !showAnalysisModal && (
         <ChartModal
           company={selectedCompany}
           onClose={() => setSelectedCompany(null)}
+        />
+      )}
+
+      {/* Company Analysis Modal */}
+      {selectedCompany && showAnalysisModal && (
+        <CompanyAnalysisModal
+          company={selectedCompany}
+          onClose={() => {
+            setShowAnalysisModal(false);
+            setSelectedCompany(null);
+          }}
         />
       )}
     </div>

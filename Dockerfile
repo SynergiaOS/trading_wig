@@ -5,7 +5,7 @@ FROM node:18-alpine AS frontend-builder
 RUN npm install -g pnpm@latest
 
 # Install Python
-RUN apk add --no-cache python3 py3-pip
+RUN apk add --no-cache python3 py3-pip py3-virtualenv
 
 WORKDIR /app
 
@@ -27,12 +27,17 @@ RUN pnpm install --no-frozen-lockfile
 # Build frontend
 RUN pnpm run build:prod
 
-# Install Python dependencies (use --break-system-packages for Docker containers)
+# Install Python dependencies (use virtual environment to avoid PEP 668 restrictions)
 WORKDIR /app
 COPY code/requirements.txt ./code/
-# Force pip to use --break-system-packages (required for Python 3.11+ in Alpine)
-RUN pip install --no-cache-dir --break-system-packages -r code/requirements.txt || \
-    (echo "⚠️  pip install failed, retrying..." && pip install --no-cache-dir --break-system-packages -r code/requirements.txt)
+# Create Python virtual environment to isolate dependencies
+RUN virtualenv /app/venv
+# Activate virtual environment for all subsequent commands
+ENV PATH="/app/venv/bin:$PATH"
+# Install build tools and headers for packages with C extensions
+RUN apk add --no-cache build-base python3-dev musl-dev libffi-dev openssl-dev postgresql-dev zlib-dev
+# Install packages into virtual environment
+RUN python -m pip install --no-cache-dir -r code/requirements.txt
 
 # Copy Python code
 COPY code/ ./code/

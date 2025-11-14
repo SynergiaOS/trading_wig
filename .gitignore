@@ -61,6 +61,7 @@ build/
 .env.local
 .env.production
 .env.development
+.railway.env
 
 # Database files
 *.db

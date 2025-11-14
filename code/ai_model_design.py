@@ -83,16 +83,28 @@ class AIConfig:
     overlap_ratio: float = 0.8
     max_latency_ms: int = 100
     
-    # Database Configuration
-    questdb_host: str = "localhost"
-    questdb_port: int = 9009
-    pocketbase_url: str = "http://localhost:8090"
-    redis_url: str = "redis://localhost:6379"
+    # Database Configuration (use environment variables for Railway service discovery)
+    questdb_host: str = None
+    questdb_port: int = None
+    pocketbase_url: str = None
+    redis_url: str = None
     
     # Monitoring
     metrics_interval_seconds: int = 60
     drift_detection_threshold: float = 0.05
     alert_webhook_url: str = ""
+    
+    def __post_init__(self):
+        import os
+        # Load from environment variables (Railway service discovery)
+        if self.questdb_host is None:
+            self.questdb_host = os.getenv('QUESTDB_HOST', 'localhost')
+        if self.questdb_port is None:
+            self.questdb_port = int(os.getenv('QUESTDB_PORT', '9009'))
+        if self.pocketbase_url is None:
+            self.pocketbase_url = os.getenv('POCKETBASE_URL', 'http://localhost:8090')
+        if self.redis_url is None:
+            self.redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379')
 
 class MarketEvent(BaseModel):
     """Market event data model"""

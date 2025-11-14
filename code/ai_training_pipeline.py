@@ -99,13 +99,13 @@ class TrainingConfig:
     step_size: int = 1
     min_data_points: int = 500
     
-    # Database configuration
-    questdb_host: str = "localhost"
-    questdb_port: int = 9009
-    questdb_user: str = "admin"
-    questdb_password: str = "quest"
-    pocketbase_url: str = "http://localhost:8090"
-    redis_url: str = "redis://localhost:6379"
+    # Database configuration (use environment variables for Railway service discovery)
+    questdb_host: str = None
+    questdb_port: int = None
+    questdb_user: str = None
+    questdb_password: str = None
+    pocketbase_url: str = None
+    redis_url: str = None
     
     # Model storage
     model_save_path: str = "./models"
@@ -119,11 +119,25 @@ class TrainingConfig:
     save_frequency: int = 10
     
     def __post_init__(self):
+        import os
         if self.track_metrics is None:
             self.track_metrics = [
                 'train_loss', 'val_loss', 'mae', 'rmse', 'r2_score',
                 'directional_accuracy', 'spectral_loss', 'confidence_score'
             ]
+        # Load from environment variables (Railway service discovery)
+        if self.questdb_host is None:
+            self.questdb_host = os.getenv('QUESTDB_HOST', 'localhost')
+        if self.questdb_port is None:
+            self.questdb_port = int(os.getenv('QUESTDB_PORT', '9009'))
+        if self.questdb_user is None:
+            self.questdb_user = os.getenv('QUESTDB_USER', 'admin')
+        if self.questdb_password is None:
+            self.questdb_password = os.getenv('QUESTDB_PASSWORD', 'quest')
+        if self.pocketbase_url is None:
+            self.pocketbase_url = os.getenv('POCKETBASE_URL', 'http://localhost:8090')
+        if self.redis_url is None:
+            self.redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379')
 
 @dataclass
 class TrainingMetrics:

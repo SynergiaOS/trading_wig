@@ -1,0 +1,6 @@
+# Minimal runtime dependencies for API servers
+# This file contains only the essential dependencies needed at runtime
+
+# HTTP requests (required for telegram_alerts and pattern detection)
+requests>=2.28.0
+

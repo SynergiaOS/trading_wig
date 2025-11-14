@@ -1,0 +1,129 @@
+# ============================================================================
+# RAILWAY SETUP - Wszystkie komendy do wykonania
+# ============================================================================
+
+# 1. OTWÓRZ RAILWAY DASHBOARD
+# https://railway.app
+
+# 2. UTWÓRZ PROJEKT (jeśli nie istnieje)
+# - Kliknij "New Project"
+# - Nazwa: WIG
+# - Environment: production
+
+# 3. DODAJ FRONTEND SERVICE
+# ============================================================================
+# W Railway Dashboard:
+# - Kliknij "+ New Service"
+# - Wybierz "GitHub Repo" → SynergiaOS/trading_wig
+# - Nazwa: frontend
+#
+# Settings → Build:
+#   Dockerfile Path: Dockerfile.frontend
+#
+# Settings → Deploy:
+#   Health Check Path: /
+#   Health Check Timeout: 100
+#   Restart Policy: ON_FAILURE
+#   Max Retries: 10
+#
+# Settings → Networking:
+#   Generate Domain (kliknij)
+#
+# Settings → Variables (dodaj):
+NODE_ENV=production
+PORT=4173
+VITE_REFRESH_INTERVAL=30000
+# UWAGA: VITE_API_URL i VITE_ANALYSIS_API_URL dodasz po deploy backend/analysis
+
+# 4. DODAJ BACKEND SERVICE
+# ============================================================================
+# W Railway Dashboard:
+# - Kliknij "+ New Service"
+# - Wybierz "GitHub Repo" → SynergiaOS/trading_wig
+# - Nazwa: backend
+#
+# Settings → Build:
+#   Dockerfile Path: Dockerfile.backend
+#
+# Settings → Deploy:
+#   Health Check Path: /data
+#   Health Check Timeout: 100
+#   Restart Policy: ON_FAILURE
+#   Max Retries: 10
+#
+# Settings → Networking:
+#   Generate Domain (kliknij)
+#   📝 SKOPIUJ URL (będzie potrzebny później)
+#
+# Settings → Variables (dodaj):
+PORT=8000
+HOST=0.0.0.0
+# Opcjonalnie (jeśli masz osobne serwisy dla baz danych):
+# POCKETBASE_URL=http://pocketbase.railway.internal:8090
+# QUESTDB_HOST=questdb.railway.internal
+# QUESTDB_PORT=9009
+# QUESTDB_USER=admin
+# QUESTDB_PASSWORD=quest
+# REDIS_URL=redis://redis.railway.internal:6379
+
+# 5. DODAJ ANALYSIS SERVICE
+# ============================================================================
+# W Railway Dashboard:
+# - Kliknij "+ New Service"
+# - Wybierz "GitHub Repo" → SynergiaOS/trading_wig
+# - Nazwa: analysis
+#
+# Settings → Build:
+#   Dockerfile Path: Dockerfile.analysis
+#
+# Settings → Deploy:
+#   Health Check Path: /api/analysis
+#   Health Check Timeout: 100
+#   Restart Policy: ON_FAILURE
+#   Max Retries: 10
+#
+# Settings → Networking:
+#   Generate Domain (kliknij)
+#   📝 SKOPIUJ URL (będzie potrzebny później)
+#
+# Settings → Variables (dodaj):
+ANALYSIS_PORT=8001
+ANALYSIS_HOST=0.0.0.0
+# Opcjonalnie (te same co Backend):
+# POCKETBASE_URL=http://pocketbase.railway.internal:8090
+# QUESTDB_HOST=questdb.railway.internal
+# QUESTDB_PORT=9009
+# QUESTDB_USER=admin
+# QUESTDB_PASSWORD=quest
+# REDIS_URL=redis://redis.railway.internal:6379
+
+# 6. DEPLOY SERWISÓW
+# ============================================================================
+# W Railway Dashboard:
+# - Dla każdego serwisu kliknij "Deploy"
+# - Zaczekaj na zakończenie builda i deploy
+# - Sprawdź czy serwis działa (zielony status)
+
+# 7. ZAKTUALIZUJ FRONTEND VARIABLES
+# ============================================================================
+# Po deploy Backend i Analysis:
+# 1. Skopiuj URL-e z Settings → Networking → Domains:
+#    - Backend: https://backend-production-XXXX.up.railway.app
+#    - Analysis: https://analysis-production-XXXX.up.railway.app
+#
+# 2. W Frontend Service → Settings → Variables → Add Variable:
+#    VITE_API_URL=https://backend-production-XXXX.up.railway.app
+#    VITE_ANALYSIS_API_URL=https://analysis-production-XXXX.up.railway.app
+#
+# 3. Railway automatycznie redeploy Frontend
+
+# 8. WERYFIKACJA
+# ============================================================================
+# Sprawdź czy wszystkie serwisy działają:
+# - Frontend: Otwórz URL w przeglądarce
+# - Backend: curl https://backend-XXXX.railway.app/data
+# - Analysis: curl https://analysis-XXXX.railway.app/api/analysis
+
+# ============================================================================
+# KONIEC
+# ============================================================================

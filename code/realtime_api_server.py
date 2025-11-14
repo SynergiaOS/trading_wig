@@ -4,7 +4,7 @@ Simple API server to serve real-time WIG80 data
 Allows deployed frontend to access live-updating data
 """
 
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 import json
 import os
 from urllib.parse import urlparse, parse_qs
@@ -26,36 +26,37 @@ class RealTimeDataAPIHandler(BaseHTTPRequestHandler):
                 return path
         return cls._possible_paths[0]  # Return first as fallback
     
+    def _get_cors_origin(self):
+        """Get CORS origin from environment or default to *"""
+        return os.environ.get('ALLOWED_ORIGIN', '*')
+    
     def do_GET(self):
         """Handle GET requests"""
         parsed_path = urlparse(self.path)
+        path = parsed_path.path
         
-        # CORS headers for cross-origin requests
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-        self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
-        self.end_headers()
+        # Determine status code and response before sending headers
+        status_code = 200
+        response_data = None
+        error_message = None
         
         # Serve the data file
-        if parsed_path.path in ['/', '/data', '/wig80']:
+        if path in ['/', '/data', '/wig80']:
             try:
                 data_file = self.get_data_file()
                 with open(data_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                
-                self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
+                response_data = data
+                status_code = 200
             except Exception as e:
-                error = {
+                status_code = 500
+                response_data = {
                     'error': {
                         'code': 'DATA_LOAD_ERROR',
                         'message': str(e)
                     }
                 }
-                self.wfile.write(json.dumps(error).encode('utf-8'))
-        elif parsed_path.path == '/wig30':
+        elif path == '/wig30':
             # Return top 30 companies (WIG30)
             try:
                 data_file = self.get_data_file()
@@ -88,24 +89,42 @@ class RealTimeDataAPIHandler(BaseHTTPRequestHandler):
                     },
                     'companies': top_30
                 }
-                
-                self.wfile.write(json.dumps(wig30_data, ensure_ascii=False).encode('utf-8'))
+                response_data = wig30_data
+                status_code = 200
             except Exception as e:
-                error = {
+                status_code = 500
+                response_data = {
                     'error': {
                         'code': 'WIG30_ERROR',
                         'message': str(e)
                     }
                 }
-                self.wfile.write(json.dumps(error).encode('utf-8'))
         else:
             # 404 for other paths
-            self.send_error(404, "Not Found")
+            status_code = 404
+            error_message = "Not Found"
+        
+        # Send response with proper status code
+        if error_message:
+            self.send_error(status_code, error_message)
+            return
+        
+        # Send response with headers
+        self.send_response(status_code)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', self._get_cors_origin())
+        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+        self.end_headers()
+        
+        if response_data:
+            self.wfile.write(json.dumps(response_data, ensure_ascii=False).encode('utf-8'))
     
     def do_OPTIONS(self):
         """Handle OPTIONS requests for CORS preflight"""
         self.send_response(200)
-        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Origin', self._get_cors_origin())
         self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
@@ -117,7 +136,7 @@ class RealTimeDataAPIHandler(BaseHTTPRequestHandler):
 def run_server(port=8000, host='0.0.0.0'):
     """Run the API server"""
     server_address = (host, port)
-    httpd = HTTPServer(server_address, RealTimeDataAPIHandler)
+    httpd = ThreadingHTTPServer(server_address, RealTimeDataAPIHandler)
     
     print(f"\n{'='*70}")
     print(f"Real-Time WIG80 Data API Server")

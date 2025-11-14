@@ -353,24 +353,16 @@ class AIModelMonitor:
 class AIServer:
     """Main AI API server with all endpoints and middleware"""
     
-    def __init__(self, config: AIConfig = None):
+    def __init__(self, app: FastAPI, config: AIConfig = None):
+        self.app = app
         self.config = config or AIConfig()
         self.ai_system = create_ai_system(self.config)
         self.model_monitor = AIModelMonitor(self.ai_system)
         self.cache = PerformanceCache()
-        
-        # Initialize FastAPI app
-        self.app = FastAPI(
-            title="WIG80 AI Analysis API",
-            description="AI-powered financial analysis and insights for Polish WIG80 market",
-            version="1.0.0",
-            docs_url="/docs",
-            redoc_url="/redoc"
-        )
-        
+
         # Setup middleware
         self._setup_middleware()
-        
+
         # Setup routes
         self._setup_routes()
     
@@ -674,15 +666,7 @@ class AIServer:
         except Exception as e:
             logger.error(f"Error in model retraining: {e}")
     
-    def run(self, host: str = "0.0.0.0", port: int = 8000, debug: bool = False):
-        """Run the AI API server"""
-        uvicorn.run(
-            self.app,
-            host=host,
-            port=port,
-            log_level="info" if debug else "warning",
-            access_log=debug
-        )
+
 
 # =============================================================================
 # Application Lifecycle Management
@@ -696,7 +680,7 @@ async def lifespan(app: FastAPI):
     
     # Initialize AI system
     config = AIConfig()
-    server = AIServer(config)
+    server = AIServer(app, config)
     app.state.server = server
     
     logger.info("AI system initialized successfully")
@@ -720,8 +704,9 @@ def create_app() -> FastAPI:
         redoc_url="/redoc",
         lifespan=lifespan
     )
-    
     return app
+
+app = create_app()
 
 # =============================================================================
 # Example Usage and CLI
@@ -733,17 +718,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="WIG80 AI Analysis API Server")
     parser.add_argument("--host", default="0.0.0.0", help="Host to bind to")
     parser.add_argument("--port", type=int, default=8000, help="Port to bind to")
-    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
-    parser.add_argument("--reload", action="store_true", help="Enable auto-reload")
+    parser.add_argument("--reload", action="store_true", help="Enable auto-reload and debug mode")
     
     args = parser.parse_args()
     
-    # Create and run server
-    server = AIServer()
-    server.run(
+    uvicorn.run(
+        "ai_api_server:app",
         host=args.host,
         port=args.port,
-        debug=args.debug
+        reload=args.reload,
+        log_level="debug" if args.reload else "info",
     )
 
 """

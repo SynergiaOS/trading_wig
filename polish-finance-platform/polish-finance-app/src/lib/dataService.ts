@@ -3,15 +3,14 @@
  * Handles fetching live WIG80 data from various sources
  */
 
-// Configuration
+// Configuration - PRODUCTION: API only, no static fallback
 const DATA_SOURCE_CONFIG = {
-  // Static JSON data source
-  staticDataUrl: '/wig80_current_data.json',
-  
-  // Backend Python API - uses environment variable or defaults to localhost
+  // Backend Python API - REQUIRED in production
   apiUrl: import.meta.env.VITE_API_URL 
     ? `${import.meta.env.VITE_API_URL}/data`
-    : 'http://localhost:8000/data',
+    : (import.meta.env.PROD 
+        ? (() => { throw new Error('VITE_API_URL must be set in production'); })()
+        : 'http://localhost:8000/data'),
   
   // Refresh interval (milliseconds) - from env or default
   refreshInterval: import.meta.env.VITE_REFRESH_INTERVAL 
@@ -19,53 +18,34 @@ const DATA_SOURCE_CONFIG = {
     : 30000, // 30 seconds default
 };
 
-export interface Company {
-  company_name: string;
-  symbol: string;
-  current_price: number;
-  change_percent: number;
-  pe_ratio: number | null;
-  pb_ratio: number | null;
-  trading_volume: string;
-  trading_volume_obrot?: string;
-  last_update?: string;
-  status?: string;
-  score?: number;
-}
-
-export interface MarketData {
-  metadata: {
-    collection_date: string;
-    data_source: string;
-    index: string;
-    currency: string;
-    total_companies: number;
-    successful_fetches?: number;
-    market_status?: string;
-    poland_time?: string;
-    is_market_hours?: boolean;
-    avg_change?: number;
-  };
-  companies: Company[];
-}
+// Re-export types from unified types file
+export type { Company, MarketData, TechnicalPattern, CompanyWithPatterns, PatternsData } from '../types/market';
 
 /**
  * Fetch real-time data for specified index
+ * PRODUCTION: Only uses API, no static fallback
  */
 export async function fetchRealTimeData(index: 'WIG80' | 'WIG30' = 'WIG80'): Promise<MarketData> {
-  try {
-    // Try backend API first, fallback to static JSON
+  const maxRetries = 3;
+  let lastError: Error | null = null;
+
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      return await fetchFromAPI(index);
-    } catch (apiError) {
-      console.warn('API fetch failed, using static JSON:', apiError);
-      return await fetchFromStaticJSON(index);
+      const data = await fetchFromAPI(index);
+      return data;
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(String(error));
+      console.warn(`API fetch attempt ${attempt}/${maxRetries} failed:`, lastError);
+      
+      // Wait before retry (exponential backoff)
+      if (attempt < maxRetries) {
+        await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+      }
     }
-  } catch (error) {
-    console.error('Error fetching real-time data:', error);
-    // Fallback to static JSON on error
-    return await fetchFromStaticJSON(index);
   }
+
+  // All retries failed - throw error instead of using static data
+  throw new Error(`Failed to fetch data from API after ${maxRetries} attempts: ${lastError?.message || 'Unknown error'}`);
 }
 
 /**
@@ -84,70 +64,57 @@ export async function fetchWIG80Data(): Promise<MarketData> {
 
 /**
  * Fetch data from Backend Python API
+ * PRODUCTION: Uses API URL from environment variables
  */
 async function fetchFromAPI(index: 'WIG80' | 'WIG30' = 'WIG80'): Promise<MarketData> {
   const endpoint = index === 'WIG30' ? '/wig30' : '/data';
   const apiUrl = import.meta.env.VITE_API_URL 
     ? `${import.meta.env.VITE_API_URL}${endpoint}`
-    : `http://localhost:8000${endpoint}`;
+    : (() => {
+        // In production, API URL must be set
+        if (import.meta.env.PROD) {
+          throw new Error('VITE_API_URL environment variable is required in production');
+        }
+        // Development fallback
+        return `http://localhost:8000${endpoint}`;
+      })();
   
-  const response = await fetch(apiUrl, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-  if (!response.ok) {
-    throw new Error(`API fetch failed: ${response.status}`);
-  }
-
-  return await response.json();
-}
-
-/**
- * Fetch data from static JSON file
- */
-async function fetchFromStaticJSON(index: 'WIG80' | 'WIG30' = 'WIG80'): Promise<MarketData> {
-  const response = await fetch(DATA_SOURCE_CONFIG.staticDataUrl);
-  
-  if (!response.ok) {
-    throw new Error(`Static JSON fetch failed: ${response.status}`);
-  }
-
-  const data = await response.json();
-  
-  // If WIG30, filter to top 30 by volume
-  if (index === 'WIG30') {
-    const companies = [...data.companies];
-    
-    const getVolumeNum = (volStr: string): number => {
-      try {
-        const vol = volStr.replace(/[KM, ]/g, '');
-        let num = parseFloat(vol);
-        if (volStr.includes('M')) num *= 1000;
-        return num;
-      } catch {
-        return 0;
-      }
-    };
-    
-    companies.sort((a, b) => getVolumeNum(b.trading_volume || '0') - getVolumeNum(a.trading_volume || '0'));
-    const top30 = companies.slice(0, 30);
-    
-    return {
-      ...data,
-      metadata: {
-        ...data.metadata,
-        index: 'WIG30',
-        total_companies: 30
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      companies: top30
-    };
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      throw new Error(`API fetch failed: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    
+    // Validate response structure
+    if (!data || !data.companies || !Array.isArray(data.companies)) {
+      throw new Error('Invalid API response structure');
+    }
+
+    return data;
+  } catch (error) {
+    clearTimeout(timeoutId);
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new Error('API request timeout');
+    }
+    throw error;
   }
-  
-  return data;
 }
+
+// REMOVED: fetchFromStaticJSON - Production uses API only
 
 /**
  * Get current data source
@@ -157,56 +124,63 @@ export function getDataSource(): string {
   return `Backend Python API (${apiUrl})`;
 }
 
-export interface TechnicalPattern {
-  pattern_name: string;
-  direction: 'bullish' | 'bearish' | 'neutral';
-  strength: number;
-  confidence: number;
-  duration: string;
-  key_levels: Record<string, number>;
-  probability: number;
-}
-
-export interface CompanyWithPatterns extends Company {
-  patterns?: TechnicalPattern[];
-  analysis?: {
-    value_score: number;
-    growth_score: number;
-    momentum_score: number;
-    overall_score: number;
-    recommendation: string;
-    sentiment: string;
-    risk_level: string;
-    confidence: number;
-  };
-}
-
-export interface PatternsData {
-  timestamp: string;
-  total_with_patterns: number;
-  companies: CompanyWithPatterns[];
-}
-
+/**
+ * Fetch patterns data from Analysis API
+ * PRODUCTION: Only uses API, returns empty data on error (non-critical)
+ */
 export async function fetchPatternsData(): Promise<PatternsData> {
+  const analysisUrl = import.meta.env.VITE_ANALYSIS_API_URL 
+    ? `${import.meta.env.VITE_ANALYSIS_API_URL}/api/analysis/patterns`
+    : (() => {
+        if (import.meta.env.PROD) {
+          // In production, return empty if not configured (non-critical feature)
+          console.warn('VITE_ANALYSIS_API_URL not set, patterns feature disabled');
+          return null;
+        }
+        return 'http://localhost:8001/api/analysis/patterns';
+      })();
+
+  if (!analysisUrl) {
+    return {
+      timestamp: new Date().toISOString(),
+      total_with_patterns: 0,
+      companies: []
+    };
+  }
+
   try {
-    const analysisUrl = import.meta.env.VITE_ANALYSIS_API_URL 
-      ? `${import.meta.env.VITE_ANALYSIS_API_URL}/api/analysis/patterns`
-      : 'http://localhost:8001/api/analysis/patterns';
-    
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
+
     const response = await fetch(analysisUrl, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
+      signal: controller.signal,
     });
 
+    clearTimeout(timeoutId);
+
     if (!response.ok) {
-      throw new Error(`Patterns API fetch failed: ${response.status}`);
+      throw new Error(`Patterns API fetch failed: ${response.status} ${response.statusText}`);
     }
 
-    return await response.json();
+    const data = await response.json();
+    
+    // Validate response
+    if (!data || typeof data !== 'object') {
+      throw new Error('Invalid patterns API response');
+    }
+
+    return {
+      timestamp: data.timestamp || new Date().toISOString(),
+      total_with_patterns: data.total_with_patterns || (data.companies?.length || 0),
+      companies: data.companies || []
+    };
   } catch (error) {
     console.error('Error fetching patterns data:', error);
+    // Return empty data instead of throwing (patterns are non-critical)
     return {
       timestamp: new Date().toISOString(),
       total_with_patterns: 0,

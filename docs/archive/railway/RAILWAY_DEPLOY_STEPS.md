@@ -48,7 +48,27 @@ https://railway.com/project/07624178-7237-4f81-89bf-96e0417bb20d
      - `ANALYSIS_HOST=0.0.0.0`
 4. Kliknij **"Deploy"**
 
-### KROK 5: Skonfiguruj Frontend Variables
+### KROK 5: Skonfiguruj Railway Service Discovery (opcjonalnie)
+
+Jeśli używasz osobnych serwisów dla baz danych (Pocketbase, QuestDB, Redis), skonfiguruj zmienne środowiskowe:
+
+**Dla Backend Service:**
+1. Przejdź do **Backend Service** → **Settings** → **Variables**
+2. Dodaj:
+   - `POCKETBASE_URL=http://pocketbase-service.railway.internal:8090`
+   - `QUESTDB_HOST=questdb-service.railway.internal`
+   - `QUESTDB_PORT=9009`
+   - `QUESTDB_USER=admin`
+   - `QUESTDB_PASSWORD=quest`
+   - `REDIS_URL=redis://redis-service.railway.internal:6379`
+
+**Dla Analysis Service:**
+1. Przejdź do **Analysis Service** → **Settings** → **Variables**
+2. Dodaj te same zmienne co dla Backend Service
+
+**Uwaga**: Zastąp nazwy serwisów (`pocketbase-service`, `questdb-service`, `redis-service`) rzeczywistymi nazwami Twoich serwisów w Railway.
+
+### KROK 6: Skonfiguruj Frontend Variables
 
 Po deploy Backend i Analysis, zaktualizuj Frontend variables:
 
@@ -79,12 +99,26 @@ VITE_ANALYSIS_API_URL=https://analysis-url.railway.app
 ```env
 PORT=8000
 HOST=0.0.0.0
+# Railway Service Discovery (jeśli używasz osobnych serwisów dla baz danych)
+POCKETBASE_URL=http://pocketbase-service.railway.internal:8090
+QUESTDB_HOST=questdb-service.railway.internal
+QUESTDB_PORT=9009
+QUESTDB_USER=admin
+QUESTDB_PASSWORD=quest
+REDIS_URL=redis://redis-service.railway.internal:6379
 ```
 
 ### Analysis Service
 ```env
 ANALYSIS_PORT=8001
 ANALYSIS_HOST=0.0.0.0
+# Railway Service Discovery (jeśli używasz osobnych serwisów dla baz danych)
+POCKETBASE_URL=http://pocketbase-service.railway.internal:8090
+QUESTDB_HOST=questdb-service.railway.internal
+QUESTDB_PORT=9009
+QUESTDB_USER=admin
+QUESTDB_PASSWORD=quest
+REDIS_URL=redis://redis-service.railway.internal:6379
 ```
 
 ## 🐛 Troubleshooting
